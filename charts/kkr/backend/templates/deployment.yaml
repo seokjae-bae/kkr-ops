@@ -1,0 +1,118 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "backend.fullname" . }}
+  labels:
+    {{- include "backend.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- else }}
+  replicas: 1
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "backend.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "backend.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: ETHEREUM_NETWORK
+              valueFrom:
+                configMapKeyRef:
+                  key: ethreum_network
+                  name: backend
+            - name: MARKETPLACE_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: marketplace_address
+                  name: backend
+            - name: MARKETPLACE_NFT_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: marketplace_nft_address
+                  name: backend
+            - name: NETWORK_PROVIDER
+              valueFrom:
+                configMapKeyRef:
+                  key: network_provider
+                  name: backend
+            - name: ALCHEMY_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: host
+                  name: alchemy
+            - name: ALCHEMY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: api_key
+                  name: alchemy
+            - name: KAS_API_ID
+              valueFrom:
+                secretKeyRef:
+                  key: id
+                  name: kas
+            - name: KAS_API_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: secret
+                  name: kas
+            - name: KAS_API_AUTH
+              valueFrom:
+                secretKeyRef:
+                  key: auth
+                  name: kas
+            - name: KAS_CHAIN_ID
+              valueFrom:
+                secretKeyRef:
+                  key: chain_id
+                  name: kas
+            - name: OPENSEA_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: api_key
+                  name: opensea
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: host
+                  name: database-backend
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  key: user
+                  name: database-backend
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: database-backend
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: database
+                  name: database-backend
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: port
+                  name: database-backend
+            - name: DB_ENGINE
+              valueFrom:
+                secretKeyRef:
+                  key: engine
+                  name: database-backend
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP

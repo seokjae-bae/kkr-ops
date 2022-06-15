@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: backend
+data:
+  ethreum_network: {{ default "" .Values.config.backend.ethreum_network | quote }}
+  marketplace_address: {{ default "" .Values.config.backend.marketplace_address | quote }}
+  marketplace_nft_address: {{ default "" .Values.config.backend.marketplace_nft_address | quote }}
+  network_provider: {{ default "" .Values.config.backend.network_provider | quote }}
