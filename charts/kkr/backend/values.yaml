@@ -39,6 +39,10 @@ secret:
     password: ""
     port: ""
     user: ""
+  aws:
+    region: ""
+    access_key: ""
+    secret_key: ""
 
 serviceAccount:
   # Specifies whether a service account should be created

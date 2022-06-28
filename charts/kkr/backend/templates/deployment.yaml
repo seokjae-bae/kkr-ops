@@ -31,87 +31,102 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: ethreum_network
-                  name: backend
+                  name: {{ include "backend.fullname" . }}-config
             - name: MARKETPLACE_ADDRESS
               valueFrom:
                 configMapKeyRef:
                   key: marketplace_address
-                  name: backend
+                  name: {{ include "backend.fullname" . }}-config
             - name: MARKETPLACE_NFT_ADDRESS
               valueFrom:
                 configMapKeyRef:
                   key: marketplace_nft_address
-                  name: backend
+                  name: {{ include "backend.fullname" . }}-config
             - name: NETWORK_PROVIDER
               valueFrom:
                 configMapKeyRef:
                   key: network_provider
-                  name: backend
+                  name: {{ include "backend.fullname" . }}-config
             - name: ALCHEMY_HOST
               valueFrom:
                 secretKeyRef:
                   key: host
-                  name: alchemy
+                  name: {{ include "backend.fullname" . }}-alchemy-secret
             - name: ALCHEMY_API_KEY
               valueFrom:
                 secretKeyRef:
                   key: api_key
-                  name: alchemy
+                  name: {{ include "backend.fullname" . }}-alchemy-secret
             - name: KAS_API_ID
               valueFrom:
                 secretKeyRef:
                   key: id
-                  name: kas
+                  name: {{ include "backend.fullname" . }}-kas-secret
             - name: KAS_API_SECRET
               valueFrom:
                 secretKeyRef:
                   key: secret
-                  name: kas
+                  name: {{ include "backend.fullname" . }}-kas-secret
             - name: KAS_API_AUTH
               valueFrom:
                 secretKeyRef:
                   key: auth
-                  name: kas
+                  name: {{ include "backend.fullname" . }}-kas-secret
             - name: KAS_CHAIN_ID
               valueFrom:
                 secretKeyRef:
                   key: chain_id
-                  name: kas
+                  name: {{ include "backend.fullname" . }}-kas-secret
             - name: OPENSEA_API_KEY
               valueFrom:
                 secretKeyRef:
                   key: api_key
-                  name: opensea
+                  name: {{ include "backend.fullname" . }}-opensea-secret
             - name: DB_HOST
               valueFrom:
                 secretKeyRef:
                   key: host
-                  name: database-backend
+                  name: {{ include "backend.fullname" . }}-database-config
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
                   key: user
-                  name: database-backend
+                  name: {{ include "backend.fullname" . }}-database-config
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: password
-                  name: database-backend
+                  name: {{ include "backend.fullname" . }}-database-config
             - name: DB_DATABASE
               valueFrom:
                 secretKeyRef:
                   key: database
-                  name: database-backend
+                  name: {{ include "backend.fullname" . }}-database-config
             - name: DB_PORT
               valueFrom:
                 secretKeyRef:
                   key: port
-                  name: database-backend
+                  name: {{ include "backend.fullname" . }}-database-config
             - name: DB_ENGINE
               valueFrom:
                 secretKeyRef:
                   key: engine
-                  name: database-backend
+                  name: {{ include "backend.fullname" . }}-database-config
+            - name: AWS_REGION
+              valueFrom:
+                secretKeyRef:
+                  key: region
+                  name: {{ include "backend.fullname" . }}-aws-credentials
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: access_key
+                  name: {{ include "backend.fullname" . }}-aws-credentials
+            - name: AWS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secret_key
+                  name: {{ include "backend.fullname" . }}-aws-credentials
           ports:
             - name: http
               containerPort: 3000

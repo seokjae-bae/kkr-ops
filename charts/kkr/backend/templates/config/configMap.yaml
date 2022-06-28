@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: backend
+  name: {{ include "backend.fullname" . }}-config
 data:
   ethreum_network: {{ default "" .Values.config.backend.ethreum_network | quote }}
   marketplace_address: {{ default "" .Values.config.backend.marketplace_address | quote }}
