@@ -1,0 +1,4 @@
+1. Get the application URL by running these commands:
+  export POD_NAME=$(kubectl get pods --namespace {{ .Release.Namespace }} -o json | jq .items[].metadata.name)
+  export CONTAINER_PORT=$(kubectl get pods -n glob-seokjae -o json | jq .items[].spec.containers[].ports[].containerPort)
+  for i in {1..$POD_NAME} do; kubectl --namespace {{ .Release.Namespace }} port-forward $POD_NAME[i] 8080:$CONTAINER_PORT[i] done;

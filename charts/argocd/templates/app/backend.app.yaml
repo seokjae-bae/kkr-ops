@@ -1,0 +1,15 @@
+{{- $HOST_NAME := .Release.Name | trunc 63 | trimSuffix "-" -}}
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: {{ $HOST_NAME }}-backend
+  namespace: argocd
+spec:
+  destination:
+    namespace: {{ default "dev" .Values.spec.destination.namespace }}
+    server: https://kubernetes.default.svc
+  project: {{ default $HOST_NAME .Values.spec.destination.project }}
+  source:
+    path: {{ default "charts/kkr/backend" .Values.source.path | quote }}
+    repoURL: {{ default "git@github.com:likelion-campus/mkp-ops.git" .Values.source.repoURL | quote }}
+    targetRevision: {{ default "develop" .Values.source.targetRevision | quote }}

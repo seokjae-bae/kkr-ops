@@ -1,0 +1,12 @@
+{{- $HOST_NAME := .Release.Name | trunc 63 | trimSuffix "-" -}}
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: {{ $HOST_NAME }}
+  namespace: argocd
+spec:
+  destinations:
+    - namespace: {{ default "dev" .Values.spec.destination.namespace }}
+      server: https://kubernetes.default.svc
+  sourceRepos:
+    - {{ default "git@github.com:likelion-campus/mkp-ops.git" .Values.source.repoURL | quote }}

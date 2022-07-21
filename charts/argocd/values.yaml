@@ -1,0 +1,13 @@
+spec:
+  destination:
+    namespace: ""
+  project: ""
+
+service:
+  type: ClusterIP
+  port: 80
+
+source:
+  targetRevision: ""
+  repoURL: ""
+  path: ""
