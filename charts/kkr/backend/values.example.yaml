@@ -75,9 +75,8 @@ service:
 ingress:
   backend:
     enabled: true
-    className: ""
+    className: kong
     annotations:
-      kubernetes.io/ingress.class: kong
       cert-manager.io/cluster-issuer: letsencrypt-prod
       kubernetes.io/tls-acme: "true"
     host: test-seokjae.croffle.me
