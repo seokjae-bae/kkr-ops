@@ -14,6 +14,20 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+config:
+  api_endpoint: ""
+  address: 
+    contract_deployer: ""
+    mock_erc721: ""
+    usdc: ""
+    weth: ""
+  ether_chain: ""
+  oauth:
+    client_id: ""
+    client_secret: ""
+    endpoint: ""
+  sentry_dsn: ""
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true

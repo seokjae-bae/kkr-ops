@@ -32,6 +32,57 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: API_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: api-endpoint
+                  name: {{ include "frontend.fullname" . }}
+            - name: CONTRACT_DEPLOYER_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: contract-deployer-address
+                  name: {{ include "frontend.fullname" . }}
+            - name: ETHER_CHAIN
+              valueFrom:
+                configMapKeyRef:
+                  key: ether-chain
+                  name: {{ include "frontend.fullname" . }}
+            - name: MOCK_ERC721_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: mock-erc721-address
+                  name: {{ include "frontend.fullname" . }}
+            - name: OAUTH_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: oauth-client-id
+                  name: {{ include "frontend.fullname" . }}
+            - name: OAUTH_CLIENT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  key: oauth-client-secret
+                  name: {{ include "frontend.fullname" . }}
+            - name: OAUTH_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: oauth-endpoint
+                  name: {{ include "frontend.fullname" . }}
+            - name: SENTRY_DSN
+              valueFrom:
+                configMapKeyRef:
+                  key: sentry-dsn
+                  name: {{ include "frontend.fullname" . }}
+            - name: USDC_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: usdc-address
+                  name: {{ include "frontend.fullname" . }}
+            - name: WETH_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: weth-address
+                  name: {{ include "frontend.fullname" . }}
           ports:
             - name: http
               containerPort: 80
