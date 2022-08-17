@@ -17,19 +17,17 @@ fullnameOverride: ""
 config:
   backend:
     ethreum_network: ""
-    marketplace_address: ""
     marketplace_nft_address: ""
     network_provider: ""
+  contract_address:
+    weth: ""
+    usdc: ""
+    market: ""
 
 secret:
   alchemy:
     host: ""
     api_key: ""
-  kas:
-    id: ""
-    secret: ""
-    auth: ""
-    chain_id: ""
   opensea:
     api_key: ""
   database:
