@@ -18,9 +18,10 @@ config:
   auth_response_headers_to_forward:
   - sub
   - current-address
-  client_id: {{ .Values.ingress.private.oauth.client_id }}
-  client_secret: {{ .Values.ingress.private.oauth.client_secret }}
-  token_introspect_url: {{ printf "http://%s.%s/%s" "auth" $namespace "oauth/token/introspect" | quote }}
+  client_id: {{ default "" .Values.config.oauth.client_id | quote }}
+  client_secret: {{ default "" .Values.config.oauth.client_secret | quote }}
+  token_introspect_url: {{ default "" .Values.config.oauth.token_introspect_url | quote }}
+
 kind: KongPlugin
 metadata:
   name: {{ trunc 63 $validateAuthServerTokenPluginName }}

@@ -8,8 +8,9 @@ metadata:
   name: public-{{ $fullName }}
   labels:
     {{- include "backend.labels" . | nindent 4 }}
-  {{- with .Values.ingress.backend.annotations }}
   annotations:
+    konghq.com/plugins: {{ $fullName }}-cors
+  {{- with .Values.ingress.backend.annotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
@@ -28,13 +29,18 @@ spec:
     - host: {{ .Values.ingress.backend.host }}
       http:
         paths:
-          {{- range .Values.ingress.public.paths }}
-          - path: {{ .path }}
-            pathType: {{ .pathType }}
+          - path: "/"
+            pathType: "ImplementationSpecific"
             backend:
               service:
                 name: {{ $fullName }}
                 port:
                   number: {{ $svcPort }}
-          {{- end }}
+          - path: "/api/v1/public"
+            pathType: "ImplementationSpecific"
+            backend:
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
 {{- end }}

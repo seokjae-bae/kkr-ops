@@ -23,6 +23,15 @@ config:
     weth: ""
     usdc: ""
     market: ""
+  event_listener_host: ""
+  order_fill_changed_queue: ""
+  order_fill_changed_queue_url: ""
+  orders_matched_queue: ""
+  orders_matched_queue_url: ""
+  oauth:
+    client_id: "client_id"
+    client_secret: "client_secret"
+    token_introspect_url: "http://auth.test-seokjae/oauth/token/introspec"
 
 secret:
   alchemy:
@@ -92,10 +101,6 @@ ingress:
     paths:
       - path: /api/v1/private
         pathType: ImplementationSpecific
-    oauth:
-      client_id: "client_id"
-      client_secret: "client_secret"
-      token_introspect_url: "http://auth.test-seokjae/oauth/token/introspec"
 
   swagger:
     paths:

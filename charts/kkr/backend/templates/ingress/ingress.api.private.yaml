@@ -9,7 +9,7 @@ metadata:
   labels:
     {{- include "backend.labels" . | nindent 4 }}
   annotations:
-    konghq.com/plugins: {{ $fullName }}-cors, {{ $fullName }}-validate-auth-server-token
+    konghq.com/plugins: {{ $fullName }}-cors,{{ $fullName }}-validate-auth-server-token
   {{- with .Values.ingress.backend.annotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
@@ -29,13 +29,11 @@ spec:
     - host: {{ .Values.ingress.backend.host }}
       http:
         paths:
-          {{- range .Values.ingress.private.paths }}
-          - path: {{ .path }}
-            pathType: {{ .pathType }}
+          - path: "/api/v1/private"
+            pathType: "ImplementationSpecific"
             backend:
               service:
                 name: {{ $fullName }}
                 port:
                   number: {{ $svcPort }}
-          {{- end }}
 {{- end }}
