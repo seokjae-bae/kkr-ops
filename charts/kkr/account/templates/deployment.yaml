@@ -1,0 +1,112 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "kkr-account.fullname" . }}
+  labels:
+    {{- include "kkr-account.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "kkr-account.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "kkr-account.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          # database-config 는 변경될 수 있다
+          env:
+            - name: DB_HOST
+              valueFrom:
+                configMapkeyRef:
+                  key: host
+                  name: {{ include "kkr-account.fullname" . }}-database
+            - name: DB_USER
+              valueFrom:
+                configMapkeyRef:
+                  key: user
+                  name: {{ include "kkr-account.fullname" . }}-database
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapkeyRef:
+                  key: password
+                  name: {{ include "kkr-account.fullname" . }}-database
+            - name: DB_DATABASE
+              valueFrom:
+                configMapkeyRef:
+                  key: database
+                  name: {{ include "kkr-account.fullname" . }}-database
+            - name: DB_PORT
+              valueFrom:
+                configMapkeyRef:
+                  key: port
+                  name: {{ include "kkr-account.fullname" . }}-database
+            - name: DB_ENGINE
+              valueFrom:
+                configMapkeyRef:
+                  key: engine
+                  name: {{ include "kkr-account.fullname" . }}-database
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                configMapkeyRef:
+                  key: access_key
+                  name: {{ include "kkr-account.fullname" . }}-aws
+            - name: AWS_SECRET_KEY
+              valueFrom:
+                configMapkeyRef:
+                  key: secret_key
+                  name: {{ include "kkr-account.fullname" . }}-aws
+            - name: ALCHEMY_API_KEY
+              valueFrom:
+                configMapkeyRef:
+                  key: api_key
+                  name: {{ include "kkr-account.fullname" . }}-alchemy
+            - name: ALCHEMY_HOST
+              valueFrom:
+                configMapkeyRef:
+                  key: host
+                  name: {{ include "kkr-account.fullname" . }}-alchemy
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
