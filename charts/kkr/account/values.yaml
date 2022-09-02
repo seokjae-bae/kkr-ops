@@ -8,26 +8,30 @@ image:
   repository: nginx
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ''
+  tag: ""
 
 imagePullSecrets: []
-nameOverride: ''
-fullnameOverride: ''
+nameOverride: ""
+fullnameOverride: ""
 
 config:
-  database:
-    host: ''
-    user: ''
-    password: ''
-    database: ''
-    port: ''
-    engine: ''
-  aws:
-    accessKey: ''
-    secretKey: ''
   alchemy:
-    apiKey: ''
-    host: ''
+    host: ""
+
+secret:
+  database:
+    host: ""
+    user: ""
+    password: ""
+    database: ""
+    port: ""
+    engine: ""
+  aws:
+    region: ""
+    accessKey: ""
+    secretKey: ""
+  alchemy:
+    apiKey: ""
 
 podAnnotations: {}
 
@@ -46,7 +50,7 @@ securityContext:
 
 service:
   type: ClusterIP
-  port: 80
+  port: 3000
 
 ingress:
   backend:
@@ -54,7 +58,7 @@ ingress:
     className: kong
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
-      kubernetes.io/tls-acme: 'true'
+      kubernetes.io/tls-acme: "true"
     host: test-seokjae.croffle.me
     tls:
       - hosts:
