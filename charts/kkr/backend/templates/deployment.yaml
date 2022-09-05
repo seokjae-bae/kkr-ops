@@ -35,8 +35,8 @@ spec:
             - name: MARKETPLACE_ADDRESS
               valueFrom:
                 configMapKeyRef:
-                  key: marketplace_address
-                  name: {{ include "backend.fullname" . }}-config
+                  key: marketplace
+                  name: {{ include "backend.fullname" . }}-contract
             - name: MARKETPLACE_NFT_ADDRESS
               valueFrom:
                 configMapKeyRef:
@@ -111,12 +111,57 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: weth_address
-                  name: {{ include "backend.fullname" . }}-config
+                  name: {{ include "backend.fullname" . }}-contract
             - name: USDC_ADDRESS
               valueFrom:
                 configMapKeyRef:
                   key: usdc_address
-                  name: {{ include "backend.fullname" . }}-config
+                  name: {{ include "backend.fullname" . }}-contract
+            - name: QUEUE_COLLECTION
+              valueFrom:
+                configMapKeyRef:
+                  key: collectionQueue
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: QUEUE_ALL_ITEM
+              valueFrom:
+                configMapKeyRef:
+                  key: allItemQueue
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: QUEUE_ITEM
+              valueFrom:
+                configMapKeyRef:
+                  key: itemQueue
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: QUEUE_ITEM_TX
+              valueFrom:
+                configMapKeyRef:
+                  key: changeItemOwnerQueue
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: QUEUE_REFRESH_ITEM_META
+              valueFrom:
+                configMapKeyRef:
+                  key: refreshItemMetaQueue
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: ORDER_FILL_CHANGED_QUEUE
+              valueFrom:
+                configMapKeyRef:
+                  key: orderFillChangedQueue
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: ORDER_FILL_CHANGED_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: orderFillChangedQueueUrl
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: ORDERS_MATCHED_QUEUE
+              valueFrom:
+                configMapKeyRef:
+                  key: ordersMatchedQueue
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: ORDERS_MATCHED_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: ordersMatchedQueueUrl
+                  name: {{ include "backend.fullname" . }}-aws-queue
           ports:
             - name: http
               containerPort: 3000

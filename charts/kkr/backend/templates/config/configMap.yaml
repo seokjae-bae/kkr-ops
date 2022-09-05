@@ -6,11 +6,28 @@ data:
   ethreum_network: {{ default "" .Values.config.backend.ethreum_network | quote }}
   marketplace_nft_address: {{ default "" .Values.config.backend.marketplace_nft_address | quote }}
   network_provider: {{ default "" .Values.config.backend.network_provider | quote }}
-  marketplace_address: {{ default "" .Values.config.contract_address.market | quote }}
-  weth_address: {{ default "" .Values.config.contract_address.weth | quote }}
-  usdc_address: {{ default "" .Values.config.contract_address.usdc | quote }}
   event_listener_host: {{ default "" .Values.config.event_listener_host | quote }}
-  order_fill_changed_queue: {{ default "" .Values.config.order_fill_changed_queue | quote }}
-  order_fill_changed_queue_url: {{ default "" .Values.config.order_fill_changed_queue_url | quote }}
-  orders_matched_queue: {{ default "" .Values.config.orders_matched_queue | quote }}
-  orders_matched_queue_url: {{ default "" .Values.config.orders_matched_queue_url | quote }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "backend.fullname" . }}-aws-queue
+data:
+  collectionQueue: {{ default "" .Values.config.aws.queue.collectionQueue | quote }}
+  allItemQueue: {{ default "" .Values.config.aws.queue.allItemQueue | quote }}
+  itemQueue: {{ default "" .Values.config.aws.queue.itemQueue | quote }}
+  changeItemOwnerQueue: {{ default "" .Values.config.aws.queue.changeItemOwnerQueue | quote }}
+  refreshItemMetaQueue: {{ default "" .Values.config.aws.queue.refreshItemMetaQueue | quote }}
+  orderFillChangedQueue: {{ default "" .Values.config.aws.queue.orderFillChangedQueue | quote }}
+  orderFillChangedQueueUrl: {{ default "" .Values.config.aws.queue.orderFillChangedQueueUrl | quote }}
+  ordersMatchedQueue: {{ default "" .Values.config.aws.queue.ordersMatchedQueue | quote }}
+  ordersMatchedQueueUrl: {{ default "" .Values.config.aws.queue.ordersMatchedQueueUrl | quote }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "backend.fullname" . }}-contract
+data:
+  marketplace: {{ default "" .Values.config.contract_address.market | quote }}
+  weth: {{ default "" .Values.config.contract_address.weth | quote }}
+  usdc: {{ default "" .Values.config.contract_address.usdc | quote }}
