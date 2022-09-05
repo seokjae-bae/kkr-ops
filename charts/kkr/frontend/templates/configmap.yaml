@@ -1,16 +1,26 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "frontend.fullname" . }}
+  name: { { include "frontend.fullname" . } }
 data:
-  api-endpoint: {{ default "" .Values.config.api_endpoint | quote }}
-  contract-deployer-address: {{ default "" .Values.config.address.contract_deployer| quote }}
-  ether-chain: {{ default "" .Values.config.ether_chain | quote }}
-  mock-erc721-address: {{ default "" .Values.config.address.mock_erc721 | quote }}
-  oauth-client-id: {{ default "" .Values.config.oauth.client_id | quote }}
-  oauth-client-secret: {{ default "" .Values.config.oauth.client_secret | quote }}
-  oauth-endpoint: {{ default "" .Values.config.oauth.endpoint | quote }}
-  sentry-dsn: {{ default "" .Values.config.sentry_dsn | quote }}
-  usdc-address: {{ default "" .Values.config.address.usdc | quote }}
-  weth-address: {{ default "" .Values.config.address.weth | quote }} 
-
+  api-endpoint: { { default "" .Values.config.api_endpoint | quote } }
+  contract-deployer-address:
+    { { default "" .Values.config.address.contract_deployer| quote } }
+  ether-chain: { { default "" .Values.config.ether_chain | quote } }
+  mock-erc721-address:
+    { { default "" .Values.config.address.mock_erc721 | quote } }
+  oauth-client-id: { { default "" .Values.config.oauth.client_id | quote } }
+  oauth-client-secret:
+    { { default "" .Values.config.oauth.client_secret | quote } }
+  oauth-endpoint: { { default "" .Values.config.oauth.endpoint | quote } }
+  sentry-dsn: { { default "" .Values.config.sentry_dsn | quote } }
+  usdc-address: { { default "" .Values.config.address.usdc | quote } }
+  weth-address: { { default "" .Values.config.address.weth | quote } }
+  wyvern_registry_address:
+    { { default "" .Values.config.address.wyvern_registry_address | quote } }
+  wyvern_static_address:
+    { { default "" .Values.config.address.wyvern_static_address | quote } }
+  wyvern_exchange_address:
+    { { default "" .Values.config.address.wyvern_exchange_address | quote } }
+  wyvern_atomicizer_address:
+    { { default "" .Values.config.address.wyvern_atomicizer_address | quote } }

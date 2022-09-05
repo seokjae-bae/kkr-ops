@@ -83,6 +83,26 @@ spec:
                 configMapKeyRef:
                   key: weth-address
                   name: {{ include "frontend.fullname" . }}
+            - name: WYVERN_REGISTRY_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: wyvern_registry_address
+                  name: {{ include "frontend.fullname" . }}
+            - name: WYVERN_STATIC_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: wyvern_static_address
+                  name: {{ include "frontend.fullname" . }}
+            - name: WYVERN_EXCHANGE_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: wyvern_exchange_address
+                  name: {{ include "frontend.fullname" . }}
+            - name: WYVERN_ATOMICIZER_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: wyvern_atomicizer_address
+                  name: {{ include "frontend.fullname" . }}
           ports:
             - name: http
               containerPort: 80
