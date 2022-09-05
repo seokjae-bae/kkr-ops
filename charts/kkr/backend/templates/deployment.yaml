@@ -110,12 +110,12 @@ spec:
             - name: WETH_ADDRESS
               valueFrom:
                 configMapKeyRef:
-                  key: weth_address
+                  key: weth
                   name: {{ include "backend.fullname" . }}-contract
             - name: USDC_ADDRESS
               valueFrom:
                 configMapKeyRef:
-                  key: usdc_address
+                  key: usdc
                   name: {{ include "backend.fullname" . }}-contract
             - name: QUEUE_COLLECTION
               valueFrom:
