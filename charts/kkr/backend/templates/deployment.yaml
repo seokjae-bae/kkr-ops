@@ -117,45 +117,70 @@ spec:
                 configMapKeyRef:
                   key: usdc
                   name: {{ include "backend.fullname" . }}-contract
-            - name: QUEUE_COLLECTION
+            - name: QUEUE_COLLECTION_NAME
               valueFrom:
                 configMapKeyRef:
-                  key: collectionQueue
+                  key: collectionQueueName
                   name: {{ include "backend.fullname" . }}-aws-queue
-            - name: QUEUE_ALL_ITEM
+            - name: QUEUE_COLLECTION_URL
               valueFrom:
                 configMapKeyRef:
-                  key: allItemQueue
+                  key: collectionQueueUrl
                   name: {{ include "backend.fullname" . }}-aws-queue
-            - name: QUEUE_ITEM
+            - name: QUEUE_ALL_ITEM_NAME
               valueFrom:
                 configMapKeyRef:
-                  key: itemQueue
+                  key: allItemQueueName
                   name: {{ include "backend.fullname" . }}-aws-queue
-            - name: QUEUE_ITEM_TX
+            - name: QUEUE_ALL_ITEM_URL
               valueFrom:
                 configMapKeyRef:
-                  key: changeItemOwnerQueue
+                  key: allItemQueueUrl
                   name: {{ include "backend.fullname" . }}-aws-queue
-            - name: QUEUE_REFRESH_ITEM_META
+            - name: QUEUE_ITEM_NAME
               valueFrom:
                 configMapKeyRef:
-                  key: refreshItemMetaQueue
+                  key: itemQueueName
                   name: {{ include "backend.fullname" . }}-aws-queue
-            - name: ORDER_FILL_CHANGED_QUEUE
+            - name: QUEUE_ITEM_URL
               valueFrom:
                 configMapKeyRef:
-                  key: orderFillChangedQueue
+                  key: itemQueueUrl
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: QUEUE_ITEM_TX_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: changeItemOwnerQueueName
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: QUEUE_ITEM_TX_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: changeItemOwnerQueueUrl
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: QUEUE_REFRESH_ITEM_META_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: refreshItemMetaQueueName
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: QUEUE_REFRESH_ITEM_META_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: refreshItemMetaQueueUrl
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: ORDER_FILL_CHANGED_QUEUE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: orderFillChangedQueueName
                   name: {{ include "backend.fullname" . }}-aws-queue
             - name: ORDER_FILL_CHANGED_QUEUE_URL
               valueFrom:
                 configMapKeyRef:
                   key: orderFillChangedQueueUrl
                   name: {{ include "backend.fullname" . }}-aws-queue
-            - name: ORDERS_MATCHED_QUEUE
+            - name: ORDERS_MATCHED_QUEUE_NAME
               valueFrom:
                 configMapKeyRef:
-                  key: ordersMatchedQueue
+                  key: ordersMatchedQueueName
                   name: {{ include "backend.fullname" . }}-aws-queue
             - name: ORDERS_MATCHED_QUEUE_URL
               valueFrom:
