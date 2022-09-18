@@ -32,7 +32,6 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          # database-config 는 변경될 수 있다
           env:
             - name: DB_HOST
               valueFrom:
@@ -64,31 +63,16 @@ spec:
                 secretKeyRef:
                   key: engine
                   name: {{ include "kkr-account.fullname" . }}-database
-            - name: AWS_REGION
-              valueFrom:
-                secretKeyRef:
-                  key: region
-                  name: {{ include "kkr-account.fullname" . }}-aws
-            - name: AWS_ACCESS_KEY
-              valueFrom:
-                secretKeyRef:
-                  key: access_key
-                  name: {{ include "kkr-account.fullname" . }}-aws
-            - name: AWS_SECRET_KEY
-              valueFrom:
-                secretKeyRef:
-                  key: secret_key
-                  name: {{ include "kkr-account.fullname" . }}-aws
             - name: ALCHEMY_API_KEY
               valueFrom:
-                secretKeyRef:
-                  key: api_key
-                  name: {{ include "kkr-account.fullname" . }}-alchemy
+                configMapKeyRef:
+                  key: alchemy-api-key
+                  name: {{ include "kkr-account.fullname" . }}
             - name: ALCHEMY_HOST
               valueFrom:
-                configMapkeyRef:
-                  key: host
-                  name: {{ include "kkr-account.fullname" . }}-alchemy
+                configMapKeyRef:
+                  key: alchemy-host
+                  name: {{ include "kkr-account.fullname" . }}
           ports:
             - name: http
               containerPort: 3000
