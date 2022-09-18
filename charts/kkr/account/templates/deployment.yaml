@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "kkr-account.fullname" . }}
+  name: {{ include "account.fullname" . }}
   labels:
-    {{- include "kkr-account.labels" . | nindent 4 }}
+    {{- include "account.labels" . | nindent 4 }}
 spec:
   {{- if not .Values.autoscaling.enabled }}
   replicas: {{ .Values.replicaCount }}
   {{- end }}
   selector:
     matchLabels:
-      {{- include "kkr-account.selectorLabels" . | nindent 6 }}
+      {{- include "account.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       {{- with .Values.podAnnotations }}
@@ -18,7 +18,7 @@ spec:
         {{- toYaml . | nindent 8 }}
       {{- end }}
       labels:
-        {{- include "kkr-account.selectorLabels" . | nindent 8 }}
+        {{- include "account.selectorLabels" . | nindent 8 }}
     spec:
       {{- with .Values.imagePullSecrets }}
       imagePullSecrets:
@@ -37,42 +37,42 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: host
-                  name: {{ include "kkr-account.fullname" . }}-database
+                  name: {{ include "account.fullname" . }}-database
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
                   key: user
-                  name: {{ include "kkr-account.fullname" . }}-database
+                  name: {{ include "account.fullname" . }}-database
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: password
-                  name: {{ include "kkr-account.fullname" . }}-database
+                  name: {{ include "account.fullname" . }}-database
             - name: DB_DATABASE
               valueFrom:
                 secretKeyRef:
                   key: database
-                  name: {{ include "kkr-account.fullname" . }}-database
+                  name: {{ include "account.fullname" . }}-database
             - name: DB_PORT
               valueFrom:
                 secretKeyRef:
                   key: port
-                  name: {{ include "kkr-account.fullname" . }}-database
+                  name: {{ include "account.fullname" . }}-database
             - name: DB_ENGINE
               valueFrom:
                 secretKeyRef:
                   key: engine
-                  name: {{ include "kkr-account.fullname" . }}-database
+                  name: {{ include "account.fullname" . }}-database
             - name: ALCHEMY_API_KEY
               valueFrom:
                 configMapKeyRef:
                   key: alchemy-api-key
-                  name: {{ include "kkr-account.fullname" . }}
+                  name: {{ include "account.fullname" . }}
             - name: ALCHEMY_HOST
               valueFrom:
                 configMapKeyRef:
                   key: alchemy-host
-                  name: {{ include "kkr-account.fullname" . }}
+                  name: {{ include "account.fullname" . }}
           ports:
             - name: http
               containerPort: 3000
