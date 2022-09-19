@@ -13,4 +13,8 @@ data:
   sentry-dsn: {{ default "" .Values.config.sentry_dsn | quote }}
   usdc-address: {{ default "" .Values.config.address.usdc | quote }}
   weth-address: {{ default "" .Values.config.address.weth | quote }} 
+  wyvern-registry-address: {{ default "" .Values.config.wyvern.registry_address | quote }} 
+  wyvern-static-address: {{ default "" .Values.config.wyvern.static_address | quote }} 
+  wyvern-exchange-address: {{ default "" .Values.config.wyvern.exchange_address | quote }} 
+  wyvern-atomicizer-address: {{ default "" .Values.config.wyvern.atomicizer_address | quote }} 
 
