@@ -8,11 +8,15 @@ image:
   repository: 293315485843.dkr.ecr.ap-northeast-2.amazonaws.com/kkr/auth
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "0.2.0"
+  tag: "0.3.0"
 
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+
+config:
+  oauth2TokenExpiresInPassword: 600
+  oauth2RefreshTokenExpiresIn: 3600
 
 database:
   host: ""
