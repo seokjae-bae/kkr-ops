@@ -21,10 +21,6 @@ config:
     mock_erc721: ""
     usdc: ""
     weth: ""
-    wyvern_registry_address: ""
-    wyvern_static_address: ""
-    wyvern_exchange_address: ""
-    wyvern_atomicizer_address: ""
   ether_chain: ""
   oauth:
     client_id: ""
