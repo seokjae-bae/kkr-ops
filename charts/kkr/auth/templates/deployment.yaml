@@ -75,6 +75,11 @@ spec:
                 configMapKeyRef:
                   key: oauth2-refresh-token-expires-in
                   name: {{ include "auth.fullname" . }}
+            - name: NEW_ACCOUNT_REPORT_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: new-account-report-queue-url
+                  name: {{ include "auth.fullname" . }}
           ports:
             - name: http
               containerPort: 5000

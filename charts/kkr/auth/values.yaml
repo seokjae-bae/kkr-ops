@@ -17,6 +17,7 @@ fullnameOverride: ""
 config:
   oauth2TokenExpiresInPassword: 600
   oauth2RefreshTokenExpiresIn: 3600
+  newAccountReportQueueUrl: ""
 
 database:
   host: ""

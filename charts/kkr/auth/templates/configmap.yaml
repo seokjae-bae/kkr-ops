@@ -5,4 +5,5 @@ metadata:
 data:
   oauth2-token-expires-in-password: {{ default "" .Values.config.oauth2TokenExpiresInPassword | quote }}
   oauth2-refresh-token-expires-in: {{ default "" .Values.config.oauth2RefreshTokenExpiresIn | quote }}
+  new-account-report-queue-url: {{ default "" .Values.config.newAccountReportQueueUrl | quote }}
 
