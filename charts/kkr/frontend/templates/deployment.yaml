@@ -86,23 +86,24 @@ spec:
             - name: WYVERN_REGISTRY_ADDRESS
               valueFrom:
                 configMapKeyRef:
-                  key: wyvern_registry_address
+                  key: wyvern-registry-address
                   name: {{ include "frontend.fullname" . }}
             - name: WYVERN_STATIC_ADDRESS
               valueFrom:
                 configMapKeyRef:
-                  key: wyvern_static_address
+                  key: wyvern-static-address
                   name: {{ include "frontend.fullname" . }}
             - name: WYVERN_EXCHANGE_ADDRESS
               valueFrom:
                 configMapKeyRef:
-                  key: wyvern_exchange_address
+                  key: wyvern-exchange-address
                   name: {{ include "frontend.fullname" . }}
             - name: WYVERN_ATOMICIZER_ADDRESS
               valueFrom:
                 configMapKeyRef:
-                  key: wyvern_atomicizer_address
+                  key: wyvern-atomicizer-address
                   name: {{ include "frontend.fullname" . }}
+
           ports:
             - name: http
               containerPort: 80

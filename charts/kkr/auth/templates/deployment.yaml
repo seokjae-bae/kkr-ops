@@ -65,6 +65,16 @@ spec:
                 secretKeyRef:
                   key: engine
                   name: database-auth
+            - name: OAUTH2_TOKEN_EXPIRES_IN_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: oauth2-token-expires-in-password
+                  name: {{ include "auth.fullname" . }}
+            - name: OAUTH2_REFRESH_TOKEN_EXPIRES_IN
+              valueFrom:
+                configMapKeyRef:
+                  key: oauth2-refresh-token-expires-in
+                  name: {{ include "auth.fullname" . }}
           ports:
             - name: http
               containerPort: 5000
