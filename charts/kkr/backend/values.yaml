@@ -19,12 +19,6 @@ config:
     queue:
       collectionQueueName: ""
       collectionQueueUrl: ""
-      allItemQueueName: ""
-      allItemQueueUrl: ""
-      itemQueueName: ""
-      itemQueueUrl: ""
-      changeItemOwnerQueueName: ""
-      changeItemOwnerQueueUrl: ""
       refreshItemMetaQueueName: ""
       refreshItemMetaQueueUrl: ""
       orderFillChangedQueueName: ""

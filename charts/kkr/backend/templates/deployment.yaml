@@ -127,36 +127,6 @@ spec:
                 configMapKeyRef:
                   key: collectionQueueUrl
                   name: {{ include "backend.fullname" . }}-aws-queue
-            - name: QUEUE_ALL_ITEM_NAME
-              valueFrom:
-                configMapKeyRef:
-                  key: allItemQueueName
-                  name: {{ include "backend.fullname" . }}-aws-queue
-            - name: QUEUE_ALL_ITEM_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: allItemQueueUrl
-                  name: {{ include "backend.fullname" . }}-aws-queue
-            - name: QUEUE_ITEM_NAME
-              valueFrom:
-                configMapKeyRef:
-                  key: itemQueueName
-                  name: {{ include "backend.fullname" . }}-aws-queue
-            - name: QUEUE_ITEM_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: itemQueueUrl
-                  name: {{ include "backend.fullname" . }}-aws-queue
-            - name: QUEUE_ITEM_TX_NAME
-              valueFrom:
-                configMapKeyRef:
-                  key: changeItemOwnerQueueName
-                  name: {{ include "backend.fullname" . }}-aws-queue
-            - name: QUEUE_ITEM_TX_URL
-              valueFrom:
-                configMapKeyRef:
-                  key: changeItemOwnerQueueUrl
-                  name: {{ include "backend.fullname" . }}-aws-queue
             - name: QUEUE_REFRESH_ITEM_META_NAME
               valueFrom:
                 configMapKeyRef:

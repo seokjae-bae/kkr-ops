@@ -15,12 +15,6 @@ metadata:
 data:
   collectionQueueName: {{ default "" .Values.config.aws.queue.collectionQueueName | quote }}
   collectionQueueUrl: {{ default "" .Values.config.aws.queue.collectionQueueUrl | quote }}
-  allItemQueueName: {{ default "" .Values.config.aws.queue.allItemQueueName | quote }}
-  allItemQueueUrl: {{ default "" .Values.config.aws.queue.allItemQueueUrl | quote }}
-  itemQueueName: {{ default "" .Values.config.aws.queue.itemQueueName | quote }}
-  itemQueueUrl: {{ default "" .Values.config.aws.queue.itemQueueUrl | quote }}
-  changeItemOwnerQueueName: {{ default "" .Values.config.aws.queue.changeItemOwnerQueueName | quote }}
-  changeItemOwnerQueueUrl: {{ default "" .Values.config.aws.queue.changeItemOwnerQueueUrl | quote }}
   refreshItemMetaQueueName: {{ default "" .Values.config.aws.queue.refreshItemMetaQueueName | quote }}
   refreshItemMetaQueueUrl: {{ default "" .Values.config.aws.queue.refreshItemMetaQueueUrl | quote }}
   orderFillChangedQueueName: {{ default "" .Values.config.aws.queue.orderFillChangedQueueName | quote }}
