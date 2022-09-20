@@ -33,6 +33,22 @@ config:
     exchange_address: ""
     atomicizer_address: ""
 
+responseTransformer:
+  enabled: true
+  config: {}
+  #  remove:
+  #    headers:
+  #    - server
+
+httpsRedirect:
+  enabled: false
+
+ipRestriction:
+  enabled: false
+  # allow:
+  #   - 210.102.61.170
+  # message: "access denied"
+
 podAnnotations: {}
 
 podSecurityContext: {}
