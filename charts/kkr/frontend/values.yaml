@@ -16,7 +16,7 @@ fullnameOverride: ""
 
 config:
   api_endpoint: ""
-  address: 
+  address:
     contract_deployer: ""
     mock_erc721: ""
     usdc: ""

@@ -15,6 +15,16 @@ nameOverride: ""
 fullnameOverride: ""
 
 config:
+  aws:
+    queue:
+      collectionQueueName: ""
+      collectionQueueUrl: ""
+      refreshItemMetaQueueName: ""
+      refreshItemMetaQueueUrl: ""
+      orderFillChangedQueueName: ""
+      orderFillChangedQueueUrl: ""
+      ordersMatchedQueueName: ""
+      ordersMatchedQueueUrl: ""
   backend:
     ethreum_network: ""
     marketplace_nft_address: ""
@@ -24,10 +34,6 @@ config:
     usdc: ""
     market: ""
   event_listener_host: ""
-  order_fill_changed_queue: ""
-  order_fill_changed_queue_url: ""
-  orders_matched_queue: ""
-  orders_matched_queue_url: ""
   oauth:
     client_id: "client_id"
     client_secret: "client_secret"

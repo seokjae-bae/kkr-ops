@@ -17,4 +17,3 @@ data:
   wyvern-static-address: {{ default "" .Values.config.wyvern.static_address | quote }} 
   wyvern-exchange-address: {{ default "" .Values.config.wyvern.exchange_address | quote }} 
   wyvern-atomicizer-address: {{ default "" .Values.config.wyvern.atomicizer_address | quote }} 
-
