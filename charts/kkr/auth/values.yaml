@@ -17,6 +17,9 @@ fullnameOverride: ""
 config:
   oauth2TokenExpiresInPassword: 600
   oauth2RefreshTokenExpiresIn: 3600
+  awsRegion: ""
+  awsAccessKey: ""
+  awsSecretKey: ""
   newAccountReportQueueUrl: ""
 
 database:
