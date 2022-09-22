@@ -117,22 +117,22 @@ spec:
                 configMapKeyRef:
                   key: usdc
                   name: {{ include "backend.fullname" . }}-contract
-            - name: QUEUE_COLLECTION_NAME
+            - name: COLLECTION_QUEUE_NAME
               valueFrom:
                 configMapKeyRef:
                   key: collectionQueueName
                   name: {{ include "backend.fullname" . }}-aws-queue
-            - name: QUEUE_COLLECTION_URL
+            - name: COLLECTION_QUEUE_URL
               valueFrom:
                 configMapKeyRef:
                   key: collectionQueueUrl
                   name: {{ include "backend.fullname" . }}-aws-queue
-            - name: QUEUE_REFRESH_ITEM_META_NAME
+            - name: REFRESH_ITEM_META_QUEUE_NAME
               valueFrom:
                 configMapKeyRef:
                   key: refreshItemMetaQueueName
                   name: {{ include "backend.fullname" . }}-aws-queue
-            - name: QUEUE_REFRESH_ITEM_META_URL
+            - name: REFRESH_ITEM_META_QUEUE_URL
               valueFrom:
                 configMapKeyRef:
                   key: refreshItemMetaQueueUrl
