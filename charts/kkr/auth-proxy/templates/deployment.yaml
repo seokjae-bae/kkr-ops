@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "auth-proxy.fullname" . }}
+  labels:
+    {{- include "auth-proxy.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "auth-proxy.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "auth-proxy.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env: 
+          - name: OAUTH_CLIENT_ID
+            valueFrom:
+              configMapKeyRef:
+                key: oauth-client-id
+                name: {{ include "auth-proxy.fullname" . }}
+          - name: OAUTH_CLIENT_SECRET
+            valueFrom:
+              configMapKeyRef:
+                key: oauth-client-secret
+                name: {{ include "auth-proxy.fullname" . }}
+          - name: OAUTH_TOKEN_ENDPOINT
+            valueFrom:
+              configMapKeyRef:
+                key: oauth-token-endpoint
+                name: {{ include "auth-proxy.fullname" . }}
+          - name: GET_NONCE_ENDPOINT
+            valueFrom:
+              configMapKeyRef:
+                key: get-nonce-endpoint
+                name: {{ include "auth-proxy.fullname" . }}
+          - name: OAUTH_SCOPE
+            valueFrom:
+              configMapKeyRef:
+                key: oauth-scope
+                name: {{ include "auth-proxy.fullname" . }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
