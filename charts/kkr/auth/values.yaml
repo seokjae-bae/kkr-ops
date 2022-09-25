@@ -21,6 +21,7 @@ config:
   awsAccessKey: ""
   awsSecretKey: ""
   newAccountReportQueueUrl: ""
+  nonceTemplate: ""
 
 database:
   host: ""

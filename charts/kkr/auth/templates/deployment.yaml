@@ -95,6 +95,11 @@ spec:
                 configMapKeyRef:
                   key: new-account-report-queue-url
                   name: {{ include "auth.fullname" . }}
+            - name: NONCE_TEMPLATE
+              valueFrom:
+                configMapKeyRef:
+                  key: nonce-template
+                  name: {{ include "auth.fullname" . }}
           ports:
             - name: http
               containerPort: 5000
