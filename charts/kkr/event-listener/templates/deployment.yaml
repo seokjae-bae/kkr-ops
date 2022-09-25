@@ -1,0 +1,176 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "event-listener.fullname" . }}
+  labels:
+    {{- include "event-listener.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "event-listener.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "event-listener.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: ORDER_CONTRACT_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: order-contract-address
+                  name: {{ include "event-listener.fullname" . }}
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: aws-access-key-id
+                  name: {{ include "event-listener.fullname" . }}
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                configMapKeyRef:
+                  key: aws-secret-access-key
+                  name: {{ include "event-listener.fullname" . }}
+            - name: AWS_DEFAULT_REGION
+              valueFrom:
+                configMapKeyRef:
+                  key: aws-region
+                  name: {{ include "event-listener.fullname" . }}
+            - name: CHAIN_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: chain-id
+                  name: {{ include "event-listener.fullname" . }}
+            - name: WEB3_PROVIDER
+              valueFrom:
+                configMapKeyRef:
+                  key: web3-provider
+                  name: {{ include "event-listener.fullname" . }}
+            - name: ALCHEMY_API_KEY
+              valueFrom:
+                configMapKeyRef:
+                  key: alchemy-api-key
+                  name: {{ include "event-listener.fullname" . }}
+            - name: ALCHEMY_HTTP_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: alchemy-http-endpoint
+                  name: {{ include "event-listener.fullname" . }}
+            - name: ALCHEMY_WS_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: alchemy-ws-endpoint
+                  name: {{ include "event-listener.fullname" . }}
+            - name: AMB_HTTP_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: amb-http-endpoint
+                  name: {{ include "event-listener.fullname" . }}
+            - name: AMB_WS_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: amb-ws-endpoint
+                  name: {{ include "event-listener.fullname" . }}
+            - name: AWS_REGION
+              valueFrom:
+                configMapKeyRef:
+                  key: aws-region
+                  name: {{ include "event-listener.fullname" . }}
+            - name: NEW_BLOCK_HEADERS_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: new-block-headers-queue-url
+                  name: {{ include "event-listener.fullname" . }}
+            - name: NFT_TRANSFER_EVENT_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: nft-transfer-event-queue-url
+                  name: {{ include "event-listener.fullname" . }}
+            - name: ORDER_FILL_CHANGED_EVENT_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: order-fill-changed-event-queue-url
+                  name: {{ include "event-listener.fullname" . }}
+            - name: ORDERS_MATCHED_EVENT_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: orders-matched-event-queue-url
+                  name: {{ include "event-listener.fullname" . }}
+            - name: OWNERSHIP_TRANSFERRED_EVENT_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: ownership-transferred-event-queue-url
+                  name: {{ include "event-listener.fullname" . }}
+            - name: DB_ENGINE
+              valueFrom:
+                configMapKeyRef:
+                  key: db-engine
+                  name: {{ include "event-listener.fullname" . }}
+            - name: DB_PORT
+              valueFrom:
+                configMapKeyRef:
+                  key: db-port
+                  name: {{ include "event-listener.fullname" . }}
+            - name: DB_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  key: db-database
+                  name: {{ include "event-listener.fullname" . }}
+            - name: DB_PASSWORD
+              valueFrom:
+                configMapKeyRef:
+                  key: db-password
+                  name: {{ include "event-listener.fullname" . }}
+            - name: DB_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: db-host
+                  name: {{ include "event-listener.fullname" . }}
+            - name: DB_USER
+              valueFrom:
+                configMapKeyRef:
+                  key: db-user
+                  name: {{ include "event-listener.fullname" . }}
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
