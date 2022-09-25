@@ -39,32 +39,32 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: host
-                  name: database-auth
+                  name: {{ include "auth.fullname" . }}-database
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
                   key: user
-                  name: database-auth
+                  name: {{ include "auth.fullname" . }}-database
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: password
-                  name: database-auth
+                  name: {{ include "auth.fullname" . }}-database
             - name: DB_DATABASE
               valueFrom:
                 secretKeyRef:
                   key: database
-                  name: database-auth
+                  name: {{ include "auth.fullname" . }}-database
             - name: DB_PORT
               valueFrom:
                 secretKeyRef:
                   key: port
-                  name: database-auth
+                  name: {{ include "auth.fullname" . }}-database
             - name: DB_ENGINE
               valueFrom:
                 secretKeyRef:
                   key: engine
-                  name: database-auth
+                  name: {{ include "auth.fullname" . }}-database
             - name: OAUTH2_TOKEN_EXPIRES_IN_PASSWORD
               valueFrom:
                 configMapKeyRef:
