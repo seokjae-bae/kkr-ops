@@ -103,6 +103,16 @@ spec:
                 configMapKeyRef:
                   key: wyvern-atomicizer-address
                   name: {{ include "frontend.fullname" . }}
+            - name: CDN_HOST_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: cdn-host-url
+                  name: {{ include "frontend.fullname" . }}
+            - name: S3_HOST_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: s3-host-url
+                  name: {{ include "frontend.fullname" . }}
 
           ports:
             - name: http

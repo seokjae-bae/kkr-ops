@@ -32,6 +32,8 @@ config:
     static_address: ""
     exchange_address: ""
     atomicizer_address: ""
+  cdn_host_url: ""
+  s3_host_url: ""
 
 responseTransformer:
   enabled: true
