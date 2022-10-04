@@ -100,6 +100,11 @@ spec:
                 configMapKeyRef:
                   key: nonce-template
                   name: {{ include "auth.fullname" . }}
+            - name: TOS_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: tos-url
+                  name: {{ include "auth.fullname" . }}
           ports:
             - name: http
               containerPort: 5000

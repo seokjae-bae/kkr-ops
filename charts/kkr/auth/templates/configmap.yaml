@@ -10,4 +10,5 @@ data:
   aws-secret-key: {{ default "" .Values.config.awsSecretKey | quote }}
   new-account-report-queue-url: {{ default "" .Values.config.newAccountReportQueueUrl | quote }}
   nonce-template: {{ default "" .Values.config.nonceTemplate | b64enc | quote }}
+  tos-url: {{ default "" .Values.config.tosUrl | quote }}
 
