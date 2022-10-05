@@ -19,3 +19,4 @@ data:
   wyvern-atomicizer-address: {{ default "" .Values.config.wyvern.atomicizer_address | quote }} 
   cdn-host-url: {{ default "" .Values.config.cdn_host_url | quote }} 
   s3-host-url: {{ default "" .Values.config.s3_host_url | quote }} 
+  base-url: {{ default "" .Values.config.base_url | quote }} 

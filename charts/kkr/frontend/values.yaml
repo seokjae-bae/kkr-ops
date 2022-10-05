@@ -34,6 +34,7 @@ config:
     atomicizer_address: ""
   cdn_host_url: ""
   s3_host_url: ""
+  base_url: ""
 
 responseTransformer:
   enabled: true

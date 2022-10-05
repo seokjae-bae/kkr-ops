@@ -113,6 +113,11 @@ spec:
                 configMapKeyRef:
                   key: s3-host-url
                   name: {{ include "frontend.fullname" . }}
+            - name: BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: base-url
+                  name: {{ include "frontend.fullname" . }}
 
           ports:
             - name: http
