@@ -1,4 +1,4 @@
-{{- if .Values.ingress.backend.enabled -}}
+{{- if .Values.ingress.swagger.enabled -}}
 {{- $fullName := include "backend.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
 {{- $ingressClass := index .Values.ingress.backend.className -}}
@@ -28,13 +28,11 @@ spec:
     - host: {{ .Values.ingress.backend.host }}
       http:
         paths:
-          {{- range .Values.ingress.swagger.paths }}
-          - path: {{ .path }}
-            pathType: {{ .pathType }}
+          - path: /docs
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: {{ $fullName }}
                 port:
                   number: {{ $svcPort }}
-          {{- end }}
 {{- end }}
