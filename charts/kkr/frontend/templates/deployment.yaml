@@ -43,6 +43,11 @@ spec:
                 configMapKeyRef:
                   key: contract-deployer-address
                   name: {{ include "frontend.fullname" . }}
+            - name: LAZY_MINT_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: lazy-mint-address
+                  name: {{ include "frontend.fullname" . }}
             - name: ETHER_CHAIN
               valueFrom:
                 configMapKeyRef:

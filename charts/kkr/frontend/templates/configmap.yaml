@@ -5,6 +5,7 @@ metadata:
 data:
   api-endpoint: {{ default "" .Values.config.api_endpoint | quote }}
   contract-deployer-address: {{ default "" .Values.config.address.contract_deployer| quote }}
+  lazy-mint-address: {{ default "" .Values.config.address.lazy_mint_address | quote }}
   ether-chain: {{ default "" .Values.config.ether_chain | quote }}
   mock-erc721-address: {{ default "" .Values.config.address.mock_erc721 | quote }}
   oauth-client-id: {{ default "" .Values.config.oauth.client_id | quote }}

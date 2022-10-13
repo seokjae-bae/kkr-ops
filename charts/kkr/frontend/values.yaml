@@ -18,6 +18,7 @@ config:
   api_endpoint: ""
   address:
     contract_deployer: ""
+    lazy_mint_address: ""
     mock_erc721: ""
     usdc: ""
     weth: ""
