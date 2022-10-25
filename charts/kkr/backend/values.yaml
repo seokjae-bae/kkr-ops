@@ -101,16 +101,6 @@ ingress:
           - test-seokjae.croffle.me
         secretName: test-seokjae.croffle.me
 
-  public:
-    paths:
-      - path: /api/v1/public
-        pathType: ImplementationSpecific
-
-  private:
-    paths:
-      - path: /api/v1/private
-        pathType: ImplementationSpecific
-
   swagger:
     enabled: false
 

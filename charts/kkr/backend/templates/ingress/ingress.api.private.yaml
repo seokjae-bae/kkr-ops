@@ -39,9 +39,10 @@ spec:
   rules:
     {{- range .Values.ingress.backend.hosts }}
     - host: {{ .host | quote }}
+    {{- end }}
       http:
         paths:
-          - path: "/api/v1/private"
+          - path: "/api/v1/private/collections"
             pathType: "ImplementationSpecific"
             backend:
               {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
@@ -53,5 +54,40 @@ spec:
               serviceName: {{ $fullName }}
               servicePort: {{ $svcPort }}
               {{- end }}
-    {{- end }}
+          - path: "/api/v1/private/items"
+            pathType: "ImplementationSpecific"
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+              {{- else }}
+              serviceName: {{ $fullName }}
+              servicePort: {{ $svcPort }}
+              {{- end }}
+          - path: "/api/v1/private/current-account"
+            pathType: "ImplementationSpecific"
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+              {{- else }}
+              serviceName: {{ $fullName }}
+              servicePort: {{ $svcPort }}
+              {{- end }}
+          - path: "/api/v1/private/reports"
+            pathType: "ImplementationSpecific"
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: {{ $fullName }}
+                port:
+                  number: {{ $svcPort }}
+              {{- else }}
+              serviceName: {{ $fullName }}
+              servicePort: {{ $svcPort }}
+              {{- end }}
 {{- end }}
