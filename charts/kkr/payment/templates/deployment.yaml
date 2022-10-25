@@ -1,0 +1,113 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "payment.fullname" . }}
+  labels:
+    {{- include "payment.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- else }}
+  replicas: 1
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "payment.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "payment.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: {{ .Chart.Name }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: BACKEND_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: backend_host
+                  name: {{ include "payment.fullname" . }}-config
+            - name: HECTO_HASH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: hash_secret
+                  name: {{ include "payment.fullname" . }}-hecto
+            - name: HECTO_MID
+              valueFrom:
+                secretKeyRef:
+                  key: mid
+                  name: {{ include "payment.fullname" . }}-hecto
+            - name: HECTO_NET_PAY_CANCLE
+              valueFrom:
+                secretKeyRef:
+                  key: net_pay_cancle
+                  name: {{ include "payment.fullname" . }}-hecto
+            - name: HECTO_PAYMENT_INFO
+              valueFrom:
+                secretKeyRef:
+                  key: payment_info
+                  name: {{ include "payment.fullname" . }}-hecto
+            - name: HECTO_PAY_CANCLE
+              valueFrom:
+                secretKeyRef:
+                  key: pay_cancle
+                  name: {{ include "payment.fullname" . }}-hecto
+            - name: HECTO_PAY_APPROVE
+              valueFrom:
+                secretKeyRef:
+                  key: pay_approve
+                  name: {{ include "payment.fullname" . }}-hecto
+            - name: HECTO_TR_INFO
+              valueFrom:
+                secretKeyRef:
+                  key: tr_info
+                  name: {{ include "payment.fullname" . }}-hecto
+            - name: BACKEND_CALLBACK_URL
+              valueFrom:
+                secretKeyRef:
+                  key: backend_callback_url
+                  name: {{ include "payment.fullname" . }}-hecto
+            - name: FRONTEND_CALLBACK_URL
+              valueFrom:
+                secretKeyRef:
+                  key: frontend_callback_url
+                  name: {{ include "payment.fullname" . }}-hecto
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: host
+                  name: {{ include "payment.fullname" . }}-database-config
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  key: user
+                  name: {{ include "payment.fullname" . }}-database-config
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: password
+                  name: {{ include "payment.fullname" . }}-database-config
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: database
+                  name: {{ include "payment.fullname" . }}-database-config
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: port
+                  name: {{ include "payment.fullname" . }}-database-config
+            - name: DB_ENGINE
+              valueFrom:
+                secretKeyRef:
+                  key: engine
+                  name: {{ include "payment.fullname" . }}-database-config
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
