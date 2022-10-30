@@ -42,10 +42,10 @@ spec:
                 configMapKeyRef:
                   key: network_provider
                   name: {{ include "backend.fullname" . }}-config
-            - name: BACKEND_HOST
+            - name: PAYMENT_HOST
               valueFrom:
                 configMapKeyRef:
-                  key: backend_host
+                  key: payment_host
                   name: {{ include "backend.fullname" . }}-config
             - name: ORIGINALS_HOST
               valueFrom:

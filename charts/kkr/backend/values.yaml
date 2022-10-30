@@ -29,7 +29,7 @@ config:
     ethreum_network: ""
     marketplace_nft_address: ""
     network_provider: ""
-    backend_host: ""
+    payment_host: ""
     originals_host: ""
   contract_address:
     weth: ""
