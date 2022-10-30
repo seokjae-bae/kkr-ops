@@ -7,8 +7,10 @@ data:
   marketplace_nft_address: {{ default "" .Values.config.backend.marketplace_nft_address | quote }}
   network_provider: {{ default "" .Values.config.backend.network_provider | quote }}
   event_listener_host: {{ default "" .Values.config.event_listener_host | quote }}
+  account_api_base_url: {{ default "" .Values.config.account_api_base_url | quote }}
+  chain_id: {{ default "" .Values.config.chain_id | quote }}
   payment_host: {{ default "" .Values.config.payment_host | quote }}
-  originalsHost: {{ default "" .Values.config.originals_host | quote }}
+  originals_host: {{ default "" .Values.config.originals_host | quote }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -23,6 +25,10 @@ data:
   orderFillChangedQueueUrl: {{ default "" .Values.config.aws.queue.orderFillChangedQueueUrl | quote }}
   ordersMatchedQueueName: {{ default "" .Values.config.aws.queue.ordersMatchedQueueName | quote }}
   ordersMatchedQueueUrl: {{ default "" .Values.config.aws.queue.ordersMatchedQueueUrl | quote }}
+  rapidCrawlingCollectionQueueName: {{ default "" .Values.config.aws.queue.rapidCrawlingCollectionQueueName | quote }}
+  rapidCrawlingCollectionQueueUrl: {{ default "" .Values.config.aws.queue.rapidCrawlingCollectionQueueUrl | quote }}
+  rapidCrawlingItemQueueName: {{ default "" .Values.config.aws.queue.rapidCrawlingItemQueueName | quote }}
+  rapidCrawlingItemQueueUrl: {{ default "" .Values.config.aws.queue.rapidCrawlingItemQueueUrl | quote }}
 ---
 apiVersion: v1
 kind: ConfigMap

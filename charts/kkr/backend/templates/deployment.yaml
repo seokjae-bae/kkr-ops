@@ -42,6 +42,16 @@ spec:
                 configMapKeyRef:
                   key: network_provider
                   name: {{ include "backend.fullname" . }}-config
+            - name: ACCOUNT_API_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: account-api-base-url
+                  name: {{ include "backend.fullname" . }}-config
+            - name: CHAIN_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: chain-id
+                  name: {{ include "backend.fullname" . }}-config
             - name: PAYMENT_HOST
               valueFrom:
                 configMapKeyRef:

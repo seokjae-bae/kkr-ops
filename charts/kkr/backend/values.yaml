@@ -25,10 +25,16 @@ config:
       orderFillChangedQueueUrl: ""
       ordersMatchedQueueName: ""
       ordersMatchedQueueUrl: ""
+      rapidCrawlingCollectionQueueName: ""
+      rapidCrawlingCollectionQueueUrl: ""
+      rapidCrawlingItemQueueName: ""
+      rapidCrawlingItemQueueUrl: ""
   backend:
     ethreum_network: ""
     marketplace_nft_address: ""
     network_provider: ""
+    account_api_base_url: ""
+    chain_id: ""
     payment_host: ""
     originals_host: ""
   contract_address:
