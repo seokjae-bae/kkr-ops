@@ -45,12 +45,12 @@ spec:
             - name: ACCOUNT_API_BASE_URL
               valueFrom:
                 configMapKeyRef:
-                  key: account-api-base-url
+                  key: account_api_base_url
                   name: {{ include "backend.fullname" . }}-config
             - name: CHAIN_ID
               valueFrom:
                 configMapKeyRef:
-                  key: chain-id
+                  key: chain_id
                   name: {{ include "backend.fullname" . }}-config
             - name: PAYMENT_HOST
               valueFrom:
