@@ -7,6 +7,8 @@ data:
   marketplace_nft_address: {{ default "" .Values.config.backend.marketplace_nft_address | quote }}
   network_provider: {{ default "" .Values.config.backend.network_provider | quote }}
   event_listener_host: {{ default "" .Values.config.event_listener_host | quote }}
+  payment_host: {{ default "" .Values.config.payment_host | quote }}
+  originalsHost: {{ default "" .Values.config.originals_host | quote }}
 ---
 apiVersion: v1
 kind: ConfigMap

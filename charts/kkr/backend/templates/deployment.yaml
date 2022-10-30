@@ -32,11 +32,6 @@ spec:
                 configMapKeyRef:
                   key: ethreum_network
                   name: {{ include "backend.fullname" . }}-config
-            - name: MARKETPLACE_ADDRESS
-              valueFrom:
-                configMapKeyRef:
-                  key: marketplace
-                  name: {{ include "backend.fullname" . }}-contract
             - name: MARKETPLACE_NFT_ADDRESS
               valueFrom:
                 configMapKeyRef:
@@ -47,6 +42,21 @@ spec:
                 configMapKeyRef:
                   key: network_provider
                   name: {{ include "backend.fullname" . }}-config
+            - name: BACKEND_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: backend_host
+                  name: {{ include "backend.fullname" . }}-config
+            - name: ORIGINALS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: originals_host
+                  name: {{ include "backend.fullname" . }}-config
+            - name: MARKETPLACE_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: marketplace
+                  name: {{ include "backend.fullname" . }}-contract
             - name: ALCHEMY_HOST
               valueFrom:
                 secretKeyRef:
