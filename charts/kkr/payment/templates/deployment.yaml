@@ -37,8 +37,12 @@ spec:
                 configMapKeyRef:
                   key: frontend_host
                   name: {{ include "payment.fullname" . }}-config
-            - name: HECTO_HASH_SECRET
+            - name: ORIGINALS_HOST
               valueFrom:
+                configMapKeyRef:
+                  key: originals_host
+                  name: {{ include "payment.fullname" . }}-config
+            - name: HECTO_HASH_SECRET
                 secretKeyRef:
                   key: hash_secret
                   name: {{ include "payment.fullname" . }}-hecto
@@ -71,16 +75,6 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: tr_info
-                  name: {{ include "payment.fullname" . }}-hecto
-            - name: BACKEND_CALLBACK_URL
-              valueFrom:
-                secretKeyRef:
-                  key: backend_callback_url
-                  name: {{ include "payment.fullname" . }}-hecto
-            - name: FRONTEND_CALLBACK_URL
-              valueFrom:
-                secretKeyRef:
-                  key: frontend_callback_url
                   name: {{ include "payment.fullname" . }}-hecto
             - name: DB_HOST
               valueFrom:
