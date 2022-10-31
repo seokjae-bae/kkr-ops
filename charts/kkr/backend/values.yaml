@@ -29,6 +29,11 @@ config:
       rapidCrawlingCollectionQueueUrl: ""
       rapidCrawlingItemQueueName: ""
       rapidCrawlingItemQueueUrl: ""
+    s3:
+      s3BucketCollection: ""
+      s3BucketItem: ""
+      s3KeyMainImage: ""
+      s3KeyBackgroundImage: ""
   backend:
     ethreum_network: ""
     marketplace_nft_address: ""

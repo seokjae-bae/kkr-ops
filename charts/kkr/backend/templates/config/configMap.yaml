@@ -33,6 +33,16 @@ data:
 apiVersion: v1
 kind: ConfigMap
 metadata:
+  name: {{ include "backend.fullname" . }}-aws-s3
+data:
+  s3BucketCollection: {{ default "" .Values.config.aws.s3.collectionQueueName | quote }}
+  s3BucketItem: {{ default "" .Values.config.aws.s3.collectionQueueName | quote }}
+  s3KeyMainImage: {{ default "" .Values.config.aws.s3.collectionQueueName | quote }}
+  s3KeyBackgroundImage: {{ default "" .Values.config.aws.s3.collectionQueueName | quote }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
   name: {{ include "backend.fullname" . }}-contract
 data:
   marketplace: {{ default "" .Values.config.contract_address.market | quote }}

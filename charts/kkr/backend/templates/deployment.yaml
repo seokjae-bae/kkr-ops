@@ -197,6 +197,27 @@ spec:
                 configMapKeyRef:
                   key: rapidCrawlingItemQueueUrl
                   name: {{ include "backend.fullname" . }}-aws-queue
+            - name: S3_BUCKET_COLLECTION
+              valueFrom:
+                configMapKeyRef:
+                  key: s3BucketCollection
+                  name: {{ include "backend.fullname" . }}-aws-s3
+            - name: S3_BUCKET_ITEM
+              valueFrom:
+                configMapKeyRef:
+                  key: s3BucketItem
+                  name: {{ include "backend.fullname" . }}-aws-s3
+            - name: S3_KEY_MAIN_IMAGE
+              valueFrom:
+                configMapKeyRef:
+                  key: s3KeyMainImage
+                  name: {{ include "backend.fullname" . }}-aws-s3
+            - name: S3_KEY_BACKGROUND_IMAGE
+              valueFrom:
+                configMapKeyRef:
+                  key: s3KeyBackgroundImage
+                  name: {{ include "backend.fullname" . }}-aws-s3
+            - name: 
           ports:
             - name: http
               containerPort: 3000
