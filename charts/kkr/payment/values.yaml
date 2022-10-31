@@ -17,6 +17,8 @@ fullnameOverride: ""
 config:
   backend:
     backend_host: ""
+    frontend_host: ""
+    originals_host: ""
   oauth:
     client_id: "test"
     client_secret: "secret"
@@ -31,8 +33,6 @@ secret:
     pay_cancle: ""
     pay_approve: ""
     tr_info: ""
-    backend_callback_url: ""
-    frontend_callback_url: ""
   database:
     host: ""
     engine: ""
