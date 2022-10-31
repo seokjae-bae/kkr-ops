@@ -43,6 +43,7 @@ spec:
                   key: originals_host
                   name: {{ include "payment.fullname" . }}-config
             - name: HECTO_HASH_SECRET
+              valueFrom:
                 secretKeyRef:
                   key: hash_secret
                   name: {{ include "payment.fullname" . }}-hecto
