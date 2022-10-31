@@ -171,7 +171,7 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: ordersMatchedQueueName
-                  name: {{ include "backend.fullname" . }}-asws-queue
+                  name: {{ include "backend.fullname" . }}-aws-queue
             - name: ORDERS_MATCHED_QUEUE_URL
               valueFrom:
                 configMapKeyRef:
