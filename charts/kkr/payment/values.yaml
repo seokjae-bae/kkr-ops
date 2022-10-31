@@ -17,6 +17,7 @@ fullnameOverride: ""
 config:
   backend:
     backend_host: ""
+    frontend_host: ""
   oauth:
     client_id: "test"
     client_secret: "secret"

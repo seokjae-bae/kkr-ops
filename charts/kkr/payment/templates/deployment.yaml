@@ -32,6 +32,11 @@ spec:
                 configMapKeyRef:
                   key: backend_host
                   name: {{ include "payment.fullname" . }}-config
+            - name: FRONTEND_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: frontend_host
+                  name: {{ include "payment.fullname" . }}-config
             - name: HECTO_HASH_SECRET
               valueFrom:
                 secretKeyRef:
