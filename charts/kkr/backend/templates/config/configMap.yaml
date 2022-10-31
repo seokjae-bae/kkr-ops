@@ -35,10 +35,10 @@ kind: ConfigMap
 metadata:
   name: {{ include "backend.fullname" . }}-aws-s3
 data:
-  s3BucketCollection: {{ default "" .Values.config.aws.s3.collectionQueueName | quote }}
-  s3BucketItem: {{ default "" .Values.config.aws.s3.collectionQueueName | quote }}
-  s3KeyMainImage: {{ default "" .Values.config.aws.s3.collectionQueueName | quote }}
-  s3KeyBackgroundImage: {{ default "" .Values.config.aws.s3.collectionQueueName | quote }}
+  s3BucketCollection: {{ default "" .Values.config.aws.s3.s3BucketCollection | quote }}
+  s3BucketItem: {{ default "" .Values.config.aws.s3.s3BucketItem | quote }}
+  s3KeyMainImage: {{ default "" .Values.config.aws.s3.s3KeyMainImage | quote }}
+  s3KeyBackgroundImage: {{ default "" .Values.config.aws.s3.s3KeyBackgroundImage | quote }}
 ---
 apiVersion: v1
 kind: ConfigMap
