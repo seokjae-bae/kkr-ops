@@ -197,6 +197,16 @@ spec:
                 configMapKeyRef:
                   key: rapidCrawlingItemQueueUrl
                   name: {{ include "backend.fullname" . }}-aws-queue
+            - name: RAPID_CRAWLING_REFRESH_ITEM_META_QUEUE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: rapidCrawlingRefreshItemMetaQueueName
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: RAPID_CRAWLING_REFRESH_ITEM_META_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: rapidCrawlingRefreshItemMetaQueueUrl
+                  name: {{ include "backend.fullname" . }}-aws-queue
             - name: S3_BUCKET_COLLECTION
               valueFrom:
                 configMapKeyRef:

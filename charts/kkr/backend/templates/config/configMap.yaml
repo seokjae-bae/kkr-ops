@@ -29,6 +29,8 @@ data:
   rapidCrawlingCollectionQueueUrl: {{ default "" .Values.config.aws.queue.rapidCrawlingCollectionQueueUrl | quote }}
   rapidCrawlingItemQueueName: {{ default "" .Values.config.aws.queue.rapidCrawlingItemQueueName | quote }}
   rapidCrawlingItemQueueUrl: {{ default "" .Values.config.aws.queue.rapidCrawlingItemQueueUrl | quote }}
+  rapidCrawlingRefreshItemMetaQueueName: {{ default "" .Values.config.aws.queue.rapidCrawlingRefreshItemMetaQueueName | quote }}
+  rapidCrawlingRefreshItemMetaQueueUrl: {{ default "" .Values.config.aws.queue.rapidCrawlingRefreshItemMetaQueueUrl | quote }}
 ---
 apiVersion: v1
 kind: ConfigMap

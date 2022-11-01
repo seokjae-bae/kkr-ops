@@ -29,6 +29,8 @@ config:
       rapidCrawlingCollectionQueueUrl: ""
       rapidCrawlingItemQueueName: ""
       rapidCrawlingItemQueueUrl: ""
+      rapidCrawlingRefreshItemMetaQueueName: ""
+      rapidCrawlingRefreshItemMetaQueueUrl: ""
     s3:
       s3BucketCollection: ""
       s3BucketItem: ""
