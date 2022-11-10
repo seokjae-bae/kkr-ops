@@ -42,6 +42,11 @@ spec:
                 configMapKeyRef:
                   key: originals_host
                   name: {{ include "payment.fullname" . }}-config
+            - name: ETHERS_NETWORK
+              valueFrom:
+                configMapKeyRef:
+                  key: ethereum_network
+                  name: {{ include "payment.fullname" . }}-config
             - name: HECTO_HASH_SECRET
               valueFrom:
                 secretKeyRef:
@@ -107,6 +112,11 @@ spec:
                 secretKeyRef:
                   key: engine
                   name: {{ include "payment.fullname" . }}-database-config
+            - name: ETHERS_ALCHEMY_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: api_key
+                  name: {{ include "payment.fullname" . }}-alchemy
           ports:
             - name: http
               containerPort: 3000

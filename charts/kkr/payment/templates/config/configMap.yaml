@@ -6,3 +6,4 @@ data:
   backend_host: {{ default "" .Values.config.backend.backend_host | quote }}
   frontend_host: {{ default "" .Values.config.backend.frontend_host | quote }}
   originals_host: {{ default "" .Values.config.backend.originals_host | quote }}
+  ethereum_network: {{ default "" .Values.config.backend.ethreum_network | quote }}

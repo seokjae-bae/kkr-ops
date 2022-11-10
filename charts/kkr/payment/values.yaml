@@ -19,6 +19,7 @@ config:
     backend_host: ""
     frontend_host: ""
     originals_host: ""
+    ethereum_network: ""
   oauth:
     client_id: "test"
     client_secret: "secret"
@@ -40,6 +41,8 @@ secret:
     password: ""
     port: ""
     user: ""
+  alchemy:
+    api_key: ""
 
 podAnnotations: {}
 
