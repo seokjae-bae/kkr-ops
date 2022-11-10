@@ -47,6 +47,36 @@ spec:
                 configMapKeyRef:
                   key: ethereum_network
                   name: {{ include "payment.fullname" . }}-config
+            - name: RAPID_CRAWLING_COLLECTION_QUEUE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: rapidCrawlingCollectionQueueName
+                  name: {{ include "payment.fullname" . }}-aws-queue
+            - name: RAPID_CRAWLING_COLLECTION_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: rapidCrawlingCollectionQueueUrl
+                  name: {{ include "payment.fullname" . }}-aws-queue
+            - name: RAPID_CRAWLING_ITEM_QUEUE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: rapidCrawlingItemQueueName
+                  name: {{ include "payment.fullname" . }}-aws-queue
+            - name: RAPID_CRAWLING_ITEM_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: rapidCrawlingItemQueueUrl
+                  name: {{ include "payment.fullname" . }}-aws-queue
+            - name: RAPID_CRAWLING_REFRESH_ITEM_META_QUEUE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: rapidCrawlingRefreshItemMetaQueueName
+                  name: {{ include "payment.fullname" . }}-aws-queue
+            - name: RAPID_CRAWLING_REFRESH_ITEM_META_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: rapidCrawlingRefreshItemMetaQueueUrl
+                  name: {{ include "payment.fullname" . }}-aws-queue
             - name: HECTO_HASH_SECRET
               valueFrom:
                 secretKeyRef:
