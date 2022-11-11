@@ -123,6 +123,11 @@ spec:
                 configMapKeyRef:
                   key: base-url
                   name: {{ include "frontend.fullname" . }}
+            - name: GTM_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: gtm-id
+                  name: {{ include "frontend.fullname" . }}
 
           ports:
             - name: http

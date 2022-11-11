@@ -36,6 +36,7 @@ config:
   cdn_host_url: ""
   s3_host_url: ""
   base_url: ""
+  gtm_id: ""
 
 responseTransformer:
   enabled: true
