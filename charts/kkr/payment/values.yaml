@@ -19,10 +19,19 @@ config:
     backend_host: ""
     frontend_host: ""
     originals_host: ""
+    ethereum_network: ""
   oauth:
     client_id: "test"
     client_secret: "secret"
     token_introspect_url: "http://auth.test-seokjae/oauth/token/introspec"
+  aws:
+    queue:
+      rapidCrawlingCollectionQueueName: ""
+      rapidCrawlingCollectionQueueUrl: ""
+      rapidCrawlingItemQueueName: ""
+      rapidCrawlingItemQueueUrl: ""
+      rapidCrawlingRefreshItemMetaQueueName: ""
+      rapidCrawlingRefreshItemMetaQueueUrl: ""
 
 secret:
   hecto:
@@ -40,6 +49,8 @@ secret:
     password: ""
     port: ""
     user: ""
+  alchemy:
+    api_key: ""
 
 podAnnotations: {}
 
