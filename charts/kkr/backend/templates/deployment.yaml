@@ -32,11 +32,6 @@ spec:
                 configMapKeyRef:
                   key: ethreum_network
                   name: {{ include "backend.fullname" . }}-config
-            - name: MARKETPLACE_ADDRESS
-              valueFrom:
-                configMapKeyRef:
-                  key: marketplace
-                  name: {{ include "backend.fullname" . }}-contract
             - name: MARKETPLACE_NFT_ADDRESS
               valueFrom:
                 configMapKeyRef:
@@ -47,6 +42,31 @@ spec:
                 configMapKeyRef:
                   key: network_provider
                   name: {{ include "backend.fullname" . }}-config
+            - name: ACCOUNT_API_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: account_api_base_url
+                  name: {{ include "backend.fullname" . }}-config
+            - name: CHAIN_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: chain_id
+                  name: {{ include "backend.fullname" . }}-config
+            - name: PAYMENT_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: payment_host
+                  name: {{ include "backend.fullname" . }}-config
+            - name: ORIGINALS_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: originals_host
+                  name: {{ include "backend.fullname" . }}-config
+            - name: MARKETPLACE_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: marketplace
+                  name: {{ include "backend.fullname" . }}-contract
             - name: ALCHEMY_HOST
               valueFrom:
                 secretKeyRef:
@@ -157,6 +177,56 @@ spec:
                 configMapKeyRef:
                   key: ordersMatchedQueueUrl
                   name: {{ include "backend.fullname" . }}-aws-queue
+            - name: RAPID_CRAWLING_COLLECTION_QUEUE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: rapidCrawlingCollectionQueueName
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: RAPID_CRAWLING_COLLECTION_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: rapidCrawlingCollectionQueueUrl
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: RAPID_CRAWLING_ITEM_QUEUE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: rapidCrawlingItemQueueName
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: RAPID_CRAWLING_ITEM_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: rapidCrawlingItemQueueUrl
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: RAPID_CRAWLING_REFRESH_ITEM_META_QUEUE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: rapidCrawlingRefreshItemMetaQueueName
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: RAPID_CRAWLING_REFRESH_ITEM_META_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: rapidCrawlingRefreshItemMetaQueueUrl
+                  name: {{ include "backend.fullname" . }}-aws-queue
+            - name: S3_BUCKET_COLLECTION
+              valueFrom:
+                configMapKeyRef:
+                  key: s3BucketCollection
+                  name: {{ include "backend.fullname" . }}-aws-s3
+            - name: S3_BUCKET_ITEM
+              valueFrom:
+                configMapKeyRef:
+                  key: s3BucketItem
+                  name: {{ include "backend.fullname" . }}-aws-s3
+            - name: S3_KEY_MAIN_IMAGE
+              valueFrom:
+                configMapKeyRef:
+                  key: s3KeyMainImage
+                  name: {{ include "backend.fullname" . }}-aws-s3
+            - name: S3_KEY_BACKGROUND_IMAGE
+              valueFrom:
+                configMapKeyRef:
+                  key: s3KeyBackgroundImage
+                  name: {{ include "backend.fullname" . }}-aws-s3
           ports:
             - name: http
               containerPort: 3000

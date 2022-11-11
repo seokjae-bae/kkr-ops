@@ -7,6 +7,10 @@ data:
   marketplace_nft_address: {{ default "" .Values.config.backend.marketplace_nft_address | quote }}
   network_provider: {{ default "" .Values.config.backend.network_provider | quote }}
   event_listener_host: {{ default "" .Values.config.event_listener_host | quote }}
+  account_api_base_url: {{ default "" .Values.config.backend.account_api_base_url | quote }}
+  chain_id: {{ default "" .Values.config.backend.chain_id | quote }}
+  payment_host: {{ default "" .Values.config.backend.payment_host | quote }}
+  originals_host: {{ default "" .Values.config.backend.originals_host | quote }}
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -21,6 +25,22 @@ data:
   orderFillChangedQueueUrl: {{ default "" .Values.config.aws.queue.orderFillChangedQueueUrl | quote }}
   ordersMatchedQueueName: {{ default "" .Values.config.aws.queue.ordersMatchedQueueName | quote }}
   ordersMatchedQueueUrl: {{ default "" .Values.config.aws.queue.ordersMatchedQueueUrl | quote }}
+  rapidCrawlingCollectionQueueName: {{ default "" .Values.config.aws.queue.rapidCrawlingCollectionQueueName | quote }}
+  rapidCrawlingCollectionQueueUrl: {{ default "" .Values.config.aws.queue.rapidCrawlingCollectionQueueUrl | quote }}
+  rapidCrawlingItemQueueName: {{ default "" .Values.config.aws.queue.rapidCrawlingItemQueueName | quote }}
+  rapidCrawlingItemQueueUrl: {{ default "" .Values.config.aws.queue.rapidCrawlingItemQueueUrl | quote }}
+  rapidCrawlingRefreshItemMetaQueueName: {{ default "" .Values.config.aws.queue.rapidCrawlingRefreshItemMetaQueueName | quote }}
+  rapidCrawlingRefreshItemMetaQueueUrl: {{ default "" .Values.config.aws.queue.rapidCrawlingRefreshItemMetaQueueUrl | quote }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "backend.fullname" . }}-aws-s3
+data:
+  s3BucketCollection: {{ default "" .Values.config.aws.s3.s3BucketCollection | quote }}
+  s3BucketItem: {{ default "" .Values.config.aws.s3.s3BucketItem | quote }}
+  s3KeyMainImage: {{ default "" .Values.config.aws.s3.s3KeyMainImage | quote }}
+  s3KeyBackgroundImage: {{ default "" .Values.config.aws.s3.s3KeyBackgroundImage | quote }}
 ---
 apiVersion: v1
 kind: ConfigMap
