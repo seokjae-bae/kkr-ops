@@ -51,6 +51,10 @@ secret:
     user: ""
   alchemy:
     api_key: ""
+  aws:
+    region: ""
+    access_key: ""
+    secret_key: ""
 
 podAnnotations: {}
 
