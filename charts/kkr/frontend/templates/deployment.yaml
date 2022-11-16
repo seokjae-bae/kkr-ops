@@ -38,40 +38,15 @@ spec:
                 configMapKeyRef:
                   key: api-endpoint
                   name: {{ include "frontend.fullname" . }}
-            - name: CONTRACT_DEPLOYER_ADDRESS
+            - name: AUTH_API_ENDPOINT
               valueFrom:
                 configMapKeyRef:
-                  key: contract-deployer-address
-                  name: {{ include "frontend.fullname" . }}
-            - name: LAZY_MINT_ADDRESS
-              valueFrom:
-                configMapKeyRef:
-                  key: lazy-mint-address
+                  key: auth-api-endpoint
                   name: {{ include "frontend.fullname" . }}
             - name: ETHER_CHAIN
               valueFrom:
                 configMapKeyRef:
                   key: ether-chain
-                  name: {{ include "frontend.fullname" . }}
-            - name: MOCK_ERC721_ADDRESS
-              valueFrom:
-                configMapKeyRef:
-                  key: mock-erc721-address
-                  name: {{ include "frontend.fullname" . }}
-            - name: OAUTH_CLIENT_ID
-              valueFrom:
-                configMapKeyRef:
-                  key: oauth-client-id
-                  name: {{ include "frontend.fullname" . }}
-            - name: OAUTH_CLIENT_SECRET
-              valueFrom:
-                configMapKeyRef:
-                  key: oauth-client-secret
-                  name: {{ include "frontend.fullname" . }}
-            - name: OAUTH_ENDPOINT
-              valueFrom:
-                configMapKeyRef:
-                  key: oauth-endpoint
                   name: {{ include "frontend.fullname" . }}
             - name: SENTRY_DSN
               valueFrom:
@@ -88,26 +63,6 @@ spec:
                 configMapKeyRef:
                   key: weth-address
                   name: {{ include "frontend.fullname" . }}
-            - name: WYVERN_REGISTRY_ADDRESS
-              valueFrom:
-                configMapKeyRef:
-                  key: wyvern-registry-address
-                  name: {{ include "frontend.fullname" . }}
-            - name: WYVERN_STATIC_ADDRESS
-              valueFrom:
-                configMapKeyRef:
-                  key: wyvern-static-address
-                  name: {{ include "frontend.fullname" . }}
-            - name: WYVERN_EXCHANGE_ADDRESS
-              valueFrom:
-                configMapKeyRef:
-                  key: wyvern-exchange-address
-                  name: {{ include "frontend.fullname" . }}
-            - name: WYVERN_ATOMICIZER_ADDRESS
-              valueFrom:
-                configMapKeyRef:
-                  key: wyvern-atomicizer-address
-                  name: {{ include "frontend.fullname" . }}
             - name: CDN_HOST_URL
               valueFrom:
                 configMapKeyRef:
@@ -122,6 +77,20 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: base-url
+                  name: {{ include "frontend.fullname" . }}
+            - name: GTM_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: gtm-id
+            - name: OAUTH_REFRESH_TOKEN_EXPIRES_IN
+              valueFrom:
+                configMapKeyRef:
+                  key: oauth-refresh-token-expires-in
+                  name: {{ include "frontend.fullname" . }}
+            - name: USE_REDUX_LOGGER
+              valueFrom:
+                configMapKeyRef:
+                  key: use-redux-logger
                   name: {{ include "frontend.fullname" . }}
             - name: GTM_ID
               valueFrom:
