@@ -23,6 +23,12 @@ config:
   newAccountReportQueueUrl: ""
   nonceTemplate: ""
   tosUrl: ""
+  identityDanalApiBase: ""
+  identityDanalCPID: ""
+  identityDanalCPPWD: ""
+  identityDanalTargetUrl: ""
+  identityOauthClientId: ""
+  identityRedirectUrl: ""
 
 database:
   host: ""

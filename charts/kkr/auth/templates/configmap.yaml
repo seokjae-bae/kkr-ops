@@ -11,4 +11,10 @@ data:
   new-account-report-queue-url: {{ default "" .Values.config.newAccountReportQueueUrl | quote }}
   nonce-template: {{ default "" .Values.config.nonceTemplate | b64enc | quote }}
   tos-url: {{ default "" .Values.config.tosUrl | quote }}
+  identity-danal-api-base: {{ default "" .Values.config.identityDanalApiBase | quote }}
+  identity-danal-cpid: {{ default "" .Values.config.identityDanalCPID | quote }}
+  identity-danal-cppwd: {{ default "" .Values.config.identityDanalCPPWD | quote }}
+  identity-danal-target-url: {{ default "" .Values.config.identityDanalTargetUrl | quote }}
+  identity-oauth-client-id: {{ default "" .Values.config.identityOauthClientId | quote }}
+  identity-redirect-url: {{ default "" .Values.config.identityRedirectUrl | quote }}
 
