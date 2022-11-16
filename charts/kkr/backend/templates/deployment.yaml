@@ -31,37 +31,37 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: ethreum_network
-                  name: {{ include "backend.fullname" . }}-config
+                  name: {{ include "backend.fullname" . }}-common
             - name: MARKETPLACE_NFT_ADDRESS
               valueFrom:
                 configMapKeyRef:
                   key: marketplace_nft_address
-                  name: {{ include "backend.fullname" . }}-config
+                  name: {{ include "backend.fullname" . }}-common
             - name: NETWORK_PROVIDER
               valueFrom:
                 configMapKeyRef:
                   key: network_provider
-                  name: {{ include "backend.fullname" . }}-config
+                  name: {{ include "backend.fullname" . }}-common
             - name: ACCOUNT_API_BASE_URL
               valueFrom:
                 configMapKeyRef:
                   key: account_api_base_url
-                  name: {{ include "backend.fullname" . }}-config
+                  name: {{ include "backend.fullname" . }}-common
             - name: CHAIN_ID
               valueFrom:
                 configMapKeyRef:
                   key: chain_id
-                  name: {{ include "backend.fullname" . }}-config
+                  name: {{ include "backend.fullname" . }}-common
             - name: PAYMENT_HOST
               valueFrom:
                 configMapKeyRef:
                   key: payment_host
-                  name: {{ include "backend.fullname" . }}-config
+                  name: {{ include "backend.fullname" . }}-common
             - name: ORIGINALS_HOST
               valueFrom:
                 configMapKeyRef:
                   key: originals_host
-                  name: {{ include "backend.fullname" . }}-config
+                  name: {{ include "backend.fullname" . }}-common
             - name: MARKETPLACE_ADDRESS
               valueFrom:
                 configMapKeyRef:
@@ -71,47 +71,47 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: host
-                  name: {{ include "backend.fullname" . }}-alchemy-secret
+                  name: {{ include "backend.fullname" . }}-alchemy
             - name: ALCHEMY_API_KEY
               valueFrom:
                 secretKeyRef:
                   key: api_key
-                  name: {{ include "backend.fullname" . }}-alchemy-secret
+                  name: {{ include "backend.fullname" . }}-alchemy
             - name: OPENSEA_API_KEY
               valueFrom:
                 secretKeyRef:
                   key: api_key
-                  name: {{ include "backend.fullname" . }}-opensea-secret
+                  name: {{ include "backend.fullname" . }}-opensea
             - name: DB_HOST
               valueFrom:
                 secretKeyRef:
                   key: host
-                  name: {{ include "backend.fullname" . }}-database-config
+                  name: {{ include "backend.fullname" . }}-database
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
                   key: user
-                  name: {{ include "backend.fullname" . }}-database-config
+                  name: {{ include "backend.fullname" . }}-database
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: password
-                  name: {{ include "backend.fullname" . }}-database-config
+                  name: {{ include "backend.fullname" . }}-database
             - name: DB_DATABASE
               valueFrom:
                 secretKeyRef:
                   key: database
-                  name: {{ include "backend.fullname" . }}-database-config
+                  name: {{ include "backend.fullname" . }}-database
             - name: DB_PORT
               valueFrom:
                 secretKeyRef:
                   key: port
-                  name: {{ include "backend.fullname" . }}-database-config
+                  name: {{ include "backend.fullname" . }}-database
             - name: DB_ENGINE
               valueFrom:
                 secretKeyRef:
                   key: engine
-                  name: {{ include "backend.fullname" . }}-database-config
+                  name: {{ include "backend.fullname" . }}-database
             - name: AWS_REGION
               valueFrom:
                 secretKeyRef:

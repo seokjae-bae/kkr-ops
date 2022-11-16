@@ -31,22 +31,22 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: backend_host
-                  name: {{ include "payment.fullname" . }}-config
+                  name: {{ include "payment.fullname" . }}-common
             - name: FRONTEND_HOST
               valueFrom:
                 configMapKeyRef:
                   key: frontend_host
-                  name: {{ include "payment.fullname" . }}-config
+                  name: {{ include "payment.fullname" . }}-common
             - name: ORIGINALS_HOST
               valueFrom:
                 configMapKeyRef:
                   key: originals_host
-                  name: {{ include "payment.fullname" . }}-config
+                  name: {{ include "payment.fullname" . }}-common
             - name: ETHERS_NETWORK
               valueFrom:
                 configMapKeyRef:
                   key: ethereum_network
-                  name: {{ include "payment.fullname" . }}-config
+                  name: {{ include "payment.fullname" . }}-common
             - name: RAPID_CRAWLING_COLLECTION_QUEUE_NAME
               valueFrom:
                 configMapKeyRef:
@@ -116,32 +116,32 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: host
-                  name: {{ include "payment.fullname" . }}-database-config
+                  name: {{ include "payment.fullname" . }}-database
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
                   key: user
-                  name: {{ include "payment.fullname" . }}-database-config
+                  name: {{ include "payment.fullname" . }}-database
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: password
-                  name: {{ include "payment.fullname" . }}-database-config
+                  name: {{ include "payment.fullname" . }}-database
             - name: DB_DATABASE
               valueFrom:
                 secretKeyRef:
                   key: database
-                  name: {{ include "payment.fullname" . }}-database-config
+                  name: {{ include "payment.fullname" . }}-database
             - name: DB_PORT
               valueFrom:
                 secretKeyRef:
                   key: port
-                  name: {{ include "payment.fullname" . }}-database-config
+                  name: {{ include "payment.fullname" . }}-database
             - name: DB_ENGINE
               valueFrom:
                 secretKeyRef:
                   key: engine
-                  name: {{ include "payment.fullname" . }}-database-config
+                  name: {{ include "payment.fullname" . }}-database
             - name: ETHERS_ALCHEMY_KEY
               valueFrom:
                 secretKeyRef:
