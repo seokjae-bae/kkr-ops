@@ -16,7 +16,7 @@ fullnameOverride: ""
 
 config:
   backend:
-    backend_host: "a"
+    backend_host: ""
   oauth:
     client_id: "client_id"
     client_secret: "client_secret"
