@@ -34,6 +34,11 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
+            - name: BACKEND_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: backend_host
+                  name: {{ include "originals.fullname" . }}
             - name: DB_HOST
               valueFrom:
                 secretKeyRef:
