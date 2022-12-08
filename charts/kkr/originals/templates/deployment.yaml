@@ -38,32 +38,32 @@ spec:
               valueFrom:
                 secretKeyRef:
                   key: host
-                  name: {{ include "originals.fullname" . }}-database-config
+                  name: {{ include "originals.fullname" . }}-database
             - name: DB_USER
               valueFrom:
                 secretKeyRef:
                   key: user
-                  name: {{ include "originals.fullname" . }}-database-config
+                  name: {{ include "originals.fullname" . }}-database
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
                   key: password
-                  name: {{ include "originals.fullname" . }}-database-config
+                  name: {{ include "originals.fullname" . }}-database
             - name: DB_DATABASE
               valueFrom:
                 secretKeyRef:
                   key: database
-                  name: {{ include "originals.fullname" . }}-database-config
+                  name: {{ include "originals.fullname" . }}-database
             - name: DB_PORT
               valueFrom:
                 secretKeyRef:
                   key: port
-                  name: {{ include "originals.fullname" . }}-database-config
+                  name: {{ include "originals.fullname" . }}-database
             - name: DB_ENGINE
               valueFrom:
                 secretKeyRef:
                   key: engine
-                  name: {{ include "originals.fullname" . }}-database-config
+                  name: {{ include "originals.fullname" . }}-database
           ports:
             - name: http
               containerPort: 3000

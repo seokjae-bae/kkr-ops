@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "payment.fullname" . }}-config
+  name: {{ include "payment.fullname" . }}-common
 data:
   backend_host: {{ default "" .Values.config.backend.backend_host | quote }}
   frontend_host: {{ default "" .Values.config.backend.frontend_host | quote }}
