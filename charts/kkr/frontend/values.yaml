@@ -29,6 +29,8 @@ config:
   oauth_refresh_token_expires_in: ""
   use_redux_logger: ""
   gtm_id: ""
+  utilities_api_endpoint: ""
+  utilities_claim_url: ""
 
 responseTransformer:
   enabled: true

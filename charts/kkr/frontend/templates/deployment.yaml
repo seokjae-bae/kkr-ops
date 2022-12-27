@@ -93,6 +93,16 @@ spec:
                 configMapKeyRef:
                   key: gtm-id
                   name: {{ include "frontend.fullname" . }}
+            - name: UTILITIES_API_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: utilities-api-endpoint
+                  name: {{ include "frontend.fullname" . }}
+            - name: UTILITIES_CLAIM_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: utilities-claim-url
+                  name: {{ include "frontend.fullname" . }}
 
           ports:
             - name: http

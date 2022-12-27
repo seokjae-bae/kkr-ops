@@ -16,3 +16,5 @@ data:
   oauth-refresh-token-expires-in: {{ default "" .Values.config.oauth_refresh_token_expires_in | quote }} 
   use-redux-logger: {{ default "" .Values.config.use_redux_logger | quote }} 
   gtm-id: {{ default "" .Values.config.gtm_id | quote  }}
+  utilities-api-endpoint: {{ default "" .Values.config.utilities_api_endpoint | quote  }}
+  utilities-claim-url: {{ default "" .Values.config.utilities_claim_url | quote  }}
