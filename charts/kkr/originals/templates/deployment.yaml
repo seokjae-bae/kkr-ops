@@ -69,6 +69,16 @@ spec:
                 secretKeyRef:
                   key: engine
                   name: {{ include "originals.fullname" . }}-database
+            - name: ALCHEMY_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: host
+                  name: {{ include "originals.fullname" . }}-alchemy
+            - name: ALCHEMY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: api_key
+                  name: {{ include "originals.fullname" . }}-alchemy
           ports:
             - name: http
               containerPort: 3000
