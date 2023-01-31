@@ -30,6 +30,7 @@ secret:
     password: ""
     port: ""
     user: ""
+    pool_size: ""
   alchemy:
     host: ""
     api_key: ""

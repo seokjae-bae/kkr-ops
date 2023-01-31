@@ -142,6 +142,11 @@ spec:
                 secretKeyRef:
                   key: engine
                   name: {{ include "payment.fullname" . }}-database
+            - name: DB_POOL_SIZE
+              valueFrom:
+                secretKeyRef:
+                  key: pool_size
+                  name: {{ include "payment.fullname" . }}-database
             - name: ETHERS_ALCHEMY_KEY
               valueFrom:
                 secretKeyRef:
@@ -166,3 +171,26 @@ spec:
             - name: http
               containerPort: 3000
               protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+            periodSeconds: 60
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

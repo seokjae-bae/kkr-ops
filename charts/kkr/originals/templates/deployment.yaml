@@ -69,6 +69,11 @@ spec:
                 secretKeyRef:
                   key: engine
                   name: {{ include "originals.fullname" . }}-database
+            - name: DB_POOL_SIZE
+              valueFrom:
+                secretKeyRef:
+                  key: pool_size
+                  name: {{ include "originals.fullname" . }}-database
             - name: ALCHEMY_HOST
               valueFrom:
                 secretKeyRef:
@@ -87,6 +92,7 @@ spec:
             httpGet:
               path: /
               port: http
+            periodSeconds: 60
           readinessProbe:
             httpGet:
               path: /

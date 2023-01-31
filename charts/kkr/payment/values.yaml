@@ -49,6 +49,7 @@ secret:
     password: ""
     port: ""
     user: ""
+    pool_size: ""
   alchemy:
     api_key: ""
   aws:
