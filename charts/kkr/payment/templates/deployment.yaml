@@ -142,6 +142,11 @@ spec:
                 secretKeyRef:
                   key: engine
                   name: {{ include "payment.fullname" . }}-database
+            - name: DB_POOL_SIZE
+              valueFrom:
+                secretKeyRef:
+                  key: pool_size
+                  name: {{ include "payment.fullname" . }}-database
             - name: ETHERS_ALCHEMY_KEY
               valueFrom:
                 secretKeyRef:

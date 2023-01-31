@@ -30,6 +30,7 @@ secret:
     password: ""
     port: ""
     user: ""
+    pool_size: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
