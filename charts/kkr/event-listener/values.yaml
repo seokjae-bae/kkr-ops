@@ -8,7 +8,7 @@ image:
   repository: 293315485843.dkr.ecr.ap-northeast-2.amazonaws.com/kkr/event-listener
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 0.3.0
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -35,6 +35,8 @@ config:
   ordersMatchedEventQueueUrl: ""
   ownershipTransferredEventQueueName: ""
   ownershipTransferredEventQueueUrl: ""
+  exchangeEventQueueName: ""
+  exchangeEventQueueUrl: ""
   web3Provider: ""
   dbEngine: ""
   dbPort: ""

@@ -38,6 +38,11 @@ spec:
                 configMapKeyRef:
                   key: order-contract-address
                   name: {{ include "event-listener.fullname" . }}
+            - name: EXCHANGE_CONTRACT_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: exchange-contract-address
+                  name: {{ include "event-listener.fullname" . }}
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 configMapKeyRef:
@@ -117,6 +122,11 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: ownership-transferred-event-queue-url
+                  name: {{ include "event-listener.fullname" . }}
+             - name: EXCHANGE_EVENT_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: exchange-event-queue-url
                   name: {{ include "event-listener.fullname" . }}
             - name: DB_ENGINE
               valueFrom:
