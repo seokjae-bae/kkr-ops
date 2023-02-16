@@ -2,6 +2,7 @@
 {{- $fullName := include "backend.fullname" . -}}
 {{- $corsPluginName := printf "%s-%s" $fullName "cors" }}
 {{- $validateAuthServerTokenPluginName := printf "%s-%s" $fullName "validate-auth-server-token" }}
+{{- $upstreamTimeoutPluginName := printf "%s-%s" $fullName "upstream-timeout" }}
 {{- $namespace := .Release.Namespace -}}
 apiVersion: configuration.konghq.com/v1
 config:
@@ -26,4 +27,14 @@ kind: KongPlugin
 metadata:
   name: {{ trunc 63 $validateAuthServerTokenPluginName }}
 plugin: oauth2-token-introspection-request
+---
+apiVersion: configuration.konghq.com/v1
+kind: KongPlugin
+metadata:
+  name: {{ trunc 63 $upstreamTimeoutPluginName }}
+config: 
+  connect_timeout: 300000
+  send_timeout: 300000
+  read_timeout: 300000
+plugin: upstream-timeout
 {{- end }}
