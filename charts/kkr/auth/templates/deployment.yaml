@@ -187,7 +187,7 @@ spec:
                   name: {{ include "auth.fullname" . }}-social
             - name: WALLET_BACKEND_BASE_URL
               valueFrom:
-                secretKeyRef:
+                configMapKeyRef:
                   key: wallet-backend-base-url
                   name: {{ include "auth.fullname" . }}-common
           ports:
