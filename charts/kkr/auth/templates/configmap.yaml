@@ -3,30 +3,30 @@ kind: ConfigMap
 metadata:
   name: {{ include "auth.fullname" . }}-aws
 data:
-  new-account-report-queue-url: {{ default "" .Values.config.newAccountReportQueueUrl | quote }}
-  wallet-create-notification-queue-name: {{ default "" .Values.config.walletCreateNotificationQueueName | quote }}
-  wallet-create-notification-queue-url: {{ default "" .Values.config.walletCreateNotificationQueueUrl | quote }}
+  new-account-report-queue-url: {{ default "" .Values.config.aws.newAccountReportQueueUrl | quote }}
+  wallet-create-notification-queue-name: {{ default "" .Values.config.aws.walletCreateNotificationQueueName | quote }}
+  wallet-create-notification-queue-url: {{ default "" .Values.config.aws.walletCreateNotificationQueueUrl | quote }}
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ include "auth.fullname" . }}-common
 data:
-  nonce-template: {{ default "" .Values.config.nonceTemplate | b64enc | quote }}
-  tos-url: {{ default "" .Values.config.tosUrl | quote }}
-  tos-updated: {{ default "" .Values.config.tosUpdated | quote }}
-  wallet-backend-base-url: {{ default "" .Values.config.walletBackendBaseUrl | quote }}
+  nonce-template: {{ default "" .Values.config.common.nonceTemplate | b64enc | quote }}
+  tos-url: {{ default "" .Values.config.common.tosUrl | quote }}
+  tos-updated: {{ default "" .Values.config.common.tosUpdated | quote }}
+  wallet-backend-base-url: {{ default "" .Values.config.common.walletBackendBaseUrl | quote }}
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: {{ include "auth.fullname" . }}-identity
 data:
-  identity-danal-api-base: {{ default "" .Values.config.identityDanalApiBase | quote }}
-  identity-danal-target-url: {{ default "" .Values.config.identityDanalTargetUrl | quote }}
-  identity-user-danal-target-url: {{ default "" .Values.config.identityUserDanalTargetUrl | quote }}
-  identity-reset-pin-danal-target-url: {{ default "" .Values.config.identityResetPinDanalTargetUrl | quote }}
-  identity-oauth-client-id: {{ default "" .Values.config.identityOauthClientId | quote }}
-  identity-valid-redirect-urls: {{ default "" .Values.config.identityValidRedirectUrls | quote }}
-  identity-home-page: {{ default "" .Values.config.identityHomePage | quote }}
+  identity-danal-api-base: {{ default "" .Values.config.identity.identityDanalApiBase | quote }}
+  identity-danal-target-url: {{ default "" .Values.config.identity.identityDanalTargetUrl | quote }}
+  identity-user-danal-target-url: {{ default "" .Values.config.identity.identityUserDanalTargetUrl | quote }}
+  identity-reset-pin-danal-target-url: {{ default "" .Values.config.identity.identityResetPinDanalTargetUrl | quote }}
+  identity-oauth-client-id: {{ default "" .Values.config.identity.identityOauthClientId | quote }}
+  identity-valid-redirect-urls: {{ default "" .Values.config.identity.identityValidRedirectUrls | quote }}
+  identity-home-page: {{ default "" .Values.config.identity.identityHomePage | quote }}
 

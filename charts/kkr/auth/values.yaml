@@ -23,7 +23,7 @@ config:
     nonceTemplate: ""
     tosUrl: ""
     tosUpdated: ""
-    walletBackednBaseUrl: ""
+    walletBackendBaseUrl: ""
   identity:
     identityDanalApiBase: ""
     identityDanalTargetUrl: ""

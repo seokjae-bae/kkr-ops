@@ -162,7 +162,7 @@ spec:
                   name: {{ include "auth.fullname" . }}-identity
             - name: IDENTITY_VALID_REDIRECT_URLS
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: identity-valid-redirect-urls
                   name: {{ include "auth.fullname" . }}-identity
             - name: IDENTITY_OAUTH_CLIENT_ID
