@@ -15,28 +15,48 @@ nameOverride: ""
 fullnameOverride: ""
 
 config:
-  oauth2TokenExpiresInPassword: 600
-  oauth2RefreshTokenExpiresIn: 3600
-  awsRegion: ""
-  awsAccessKey: ""
-  awsSecretKey: ""
-  newAccountReportQueueUrl: ""
-  nonceTemplate: ""
-  tosUrl: ""
-  identityDanalApiBase: ""
-  identityDanalCPID: ""
-  identityDanalCPPWD: ""
-  identityDanalTargetUrl: ""
-  identityOauthClientId: ""
-  identityRedirectUrl: ""
+  aws:
+    newAccountReportQueueUrl: ""
+    walletCreateNotificationQueueName: ""
+    walletCreateNotificationQueueUrl: ""
+  common:
+    nonceTemplate: ""
+    tosUrl: ""
+    tosUpdated: ""
+    walletBackednBaseUrl: ""
+  identity:
+    identityDanalApiBase: ""
+    identityDanalTargetUrl: ""
+    identityUserDanalTargetUrl: ""
+    identityResetPinDanalTargetUrl: ""
+    identityOauthClientId: ""
+    identityValidRedirectUrls: ""
+    identityHomePage: ""
 
-database:
-  host: ""
-  engine: postgres
-  database: ""
-  password: ""
-  port: "5432"
-  user: ""
+secret:
+  database:
+    host: ""
+    user: ""
+    port: "5432"
+    password: ""
+    database: ""
+    engine: postgres
+  aws:
+    awsRegion: "ap-northeast-2"
+    awsAccessKey: ""
+    awsSecretKey: ""
+  oauth:
+    oauth2TokenExpiresInPassword: 600
+    oauth2RefreshTokenExpiresIn: 1000000
+    secretKey: ""
+    resetPinJwtExp: 180
+  identity:
+    identityDanalCPID: ""
+    identityDanalCPPWD: ""
+    identityEncryptKey: ""
+    identityValidRedirectUrls: ""
+  social:
+    socialLoginAppleAppId: ""
 
 serviceAccount:
   # Specifies whether a service account should be created

@@ -1,20 +1,32 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: {{ include "auth.fullname" . }}
+  name: {{ include "auth.fullname" . }}-aws
 data:
-  oauth2-token-expires-in-password: {{ default "" .Values.config.oauth2TokenExpiresInPassword | quote }}
-  oauth2-refresh-token-expires-in: {{ default "" .Values.config.oauth2RefreshTokenExpiresIn | quote }}
-  aws-region: {{ default "" .Values.config.awsRegion | quote }}
-  aws-access-key: {{ default "" .Values.config.awsAccessKey | quote }}
-  aws-secret-key: {{ default "" .Values.config.awsSecretKey | quote }}
   new-account-report-queue-url: {{ default "" .Values.config.newAccountReportQueueUrl | quote }}
+  wallet-create-notification-queue-name: {{ default "" .Values.config.walletCreateNotificationQueueName | quote }}
+  wallet-create-notification-queue-url: {{ default "" .Values.config.walletCreateNotificationQueueUrl | quote }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "auth.fullname" . }}-common
+data:
   nonce-template: {{ default "" .Values.config.nonceTemplate | b64enc | quote }}
   tos-url: {{ default "" .Values.config.tosUrl | quote }}
+  tos-updated: {{ default "" .Values.config.tosUpdated | quote }}
+  wallet-backend-base-url: {{ default "" .Values.config.walletBackendBaseUrl | quote }}
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "auth.fullname" . }}-identity
+data:
   identity-danal-api-base: {{ default "" .Values.config.identityDanalApiBase | quote }}
-  identity-danal-cpid: {{ default "" .Values.config.identityDanalCPID | quote }}
-  identity-danal-cppwd: {{ default "" .Values.config.identityDanalCPPWD | quote }}
   identity-danal-target-url: {{ default "" .Values.config.identityDanalTargetUrl | quote }}
+  identity-user-danal-target-url: {{ default "" .Values.config.identityUserDanalTargetUrl | quote }}
+  identity-reset-pin-danal-target-url: {{ default "" .Values.config.identityResetPinDanalTargetUrl | quote }}
   identity-oauth-client-id: {{ default "" .Values.config.identityOauthClientId | quote }}
-  identity-redirect-url: {{ default "" .Values.config.identityRedirectUrl | quote }}
+  identity-valid-redirect-urls: {{ default "" .Values.config.identityValidRedirectUrls | quote }}
+  identity-home-page: {{ default "" .Values.config.identityHomePage | quote }}
 

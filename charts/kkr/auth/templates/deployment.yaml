@@ -67,79 +67,129 @@ spec:
                   name: {{ include "auth.fullname" . }}-database
             - name: OAUTH2_TOKEN_EXPIRES_IN_PASSWORD
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: oauth2-token-expires-in-password
-                  name: {{ include "auth.fullname" . }}
+                  name: {{ include "auth.fullname" . }}-oauth
             - name: OAUTH2_REFRESH_TOKEN_EXPIRES_IN
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: oauth2-refresh-token-expires-in
-                  name: {{ include "auth.fullname" . }}
+                  name: {{ include "auth.fullname" . }}-oauth
+            - name: SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: secret-key
+                  name: {{ include "auth.fullname" . }}-oauth
+            - name: RESET_PIN_JWT_EXP
+              valueFrom:
+                secretKeyRef:
+                  key: reset-pin-jwp-exp
+                  name: {{ include "auth.fullname" . }}-oauth
             - name: AWS_REGION
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: aws-region
-                  name: {{ include "auth.fullname" . }}
+                  name: {{ include "auth.fullname" . }}-aws
             - name: AWS_ACCESS_KEY
               valueFrom:
-                configMapKeyRef:
+               secretKeyRef:
                   key: aws-access-key
-                  name: {{ include "auth.fullname" . }}
+                  name: {{ include "auth.fullname" . }}-aws
             - name: AWS_SECRET_KEY
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: aws-secret-key
-                  name: {{ include "auth.fullname" . }}
+                  name: {{ include "auth.fullname" . }}-aws
             - name: NEW_ACCOUNT_REPORT_QUEUE_URL
               valueFrom:
                 configMapKeyRef:
                   key: new-account-report-queue-url
-                  name: {{ include "auth.fullname" . }}
+                  name: {{ include "auth.fullname" . }}-aws
+            - name: AWS_WALLET_CREATE_NOTIFICATION_QUEUE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: wallet-create-notification-queue-name
+                  name: {{ include "auth.fullname" . }}-aws
+            - name: AWS_WALLET_CREATE_NOTIFICATION_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: wallet-create-notification-queue-url
+                  name: {{ include "auth.fullname" . }}-aws
             - name: NONCE_TEMPLATE
               valueFrom:
                 configMapKeyRef:
                   key: nonce-template
-                  name: {{ include "auth.fullname" . }}
+                  name: {{ include "auth.fullname" . }}-common
             - name: TOS_URL
               valueFrom:
                 configMapKeyRef:
                   key: tos-url
-                  name: {{ include "auth.fullname" . }}
-            - name: TOS_URL
+                  name: {{ include "auth.fullname" . }}-common
+            - name: TOS_UPDATED
               valueFrom:
                 configMapKeyRef:
-                  key: tos-url
-                  name: {{ include "auth.fullname" . }}
+                  key: tos-updated
+                  name: {{ include "auth.fullname" . }}-common
             - name: IDENTITY_DANAL_API_BASE
               valueFrom:
                 configMapKeyRef:
                   key: identity-danal-api-base
-                  name: {{ include "auth.fullname" . }}
+                  name: {{ include "auth.fullname" . }}-identity
             - name: IDENTITY_DANAL_CPID
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: identity-danal-cpid
-                  name: {{ include "auth.fullname" . }}
+                  name: {{ include "auth.fullname" . }}-identity
             - name: IDENTITY_DANAL_CPPWD
               valueFrom:
-                configMapKeyRef:
+                secretKeyRef:
                   key: identity-danal-cppwd
-                  name: {{ include "auth.fullname" . }}
+                  name: {{ include "auth.fullname" . }}-identity
             - name: IDENTITY_DANAL_TARGET_URL
               valueFrom:
                 configMapKeyRef:
                   key: identity-danal-target-url
-                  name: {{ include "auth.fullname" . }}
-            - name: IDENTITY_REDIRECT_URL
+                  name: {{ include "auth.fullname" . }}-identity
+            - name: IDENTITY_USER_DANAL_TARGET_URL
               valueFrom:
                 configMapKeyRef:
-                  key: identity-redirect-url
-                  name: {{ include "auth.fullname" . }}
+                  key: identity-user-danal-target-url
+                  name: {{ include "auth.fullname" . }}-identity
+            - name: IDENTITY_RESET_PIN_DANAL_TARGET_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: identity-reset-pin-danal-target-url
+                  name: {{ include "auth.fullname" . }}-identity
+            - name: IDENTITY_VALID_REDIRECT_URLS
+              valueFrom:
+                configMapKeyRef:
+                  key: identity-valid-redirect-urls
+                  name: {{ include "auth.fullname" . }}-identity
             - name: IDENTITY_OAUTH_CLIENT_ID
               valueFrom:
                 configMapKeyRef:
                   key: identity-oauth-client-id
-                  name: {{ include "auth.fullname" . }}
+                  name: {{ include "auth.fullname" . }}-identity
+            - name: IDENTITY_ENCRYPT_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: identity-encrypt-key
+                  name: {{ include "auth.fullname" . }}-identity
+            - name: IDENTITY_HOME_PAGE
+              valueFrom:
+                configMapKeyRef:
+                  key: identity-home-page
+                  name: {{ include "auth.fullname" . }}-identity
+            - name: SOCIAL_LOGIN_APPLE_APP_ID
+              valueFrom:
+                secretKeyRef:
+                  key: social-login-apple-app-id
+                  name: {{ include "auth.fullname" . }}-social
+            - name: WALLET_BACKEND_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  key: wallet-backend-base-url
+                  name: {{ include "auth.fullname" . }}-common
           ports:
             - name: http
               containerPort: 5000
