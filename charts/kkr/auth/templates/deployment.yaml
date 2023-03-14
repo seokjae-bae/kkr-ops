@@ -83,7 +83,7 @@ spec:
             - name: RESET_PIN_JWT_EXP
               valueFrom:
                 secretKeyRef:
-                  key: reset-pin-jwp-exp
+                  key: reset-pin-jwt-exp
                   name: {{ include "auth.fullname" . }}-oauth
             - name: AWS_REGION
               valueFrom:
