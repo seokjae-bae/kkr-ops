@@ -14,6 +14,9 @@ imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
 
+worker:
+  enabled: false
+
 config:
   aws:
     newAccountReportQueueUrl: ""
@@ -46,10 +49,10 @@ secret:
     awsAccessKey: ""
     awsSecretKey: ""
   oauth:
-    oauth2TokenExpiresInPassword: 600
-    oauth2RefreshTokenExpiresIn: 1000000
+    oauth2TokenExpiresInPassword: "600"
+    oauth2RefreshTokenExpiresIn: "1000000"
     secretKey: ""
-    resetPinJwtExp: 180
+    resetPinJwtExp: "180"
   identity:
     identityDanalCPID: ""
     identityDanalCPPWD: ""
