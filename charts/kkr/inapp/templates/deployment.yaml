@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "inapp.fullname" . }}
+  labels:
+    {{- include "inapp.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "inapp.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "inapp.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: API_BASE_URL
+              valueFrom:
+                configMapKeyRef: 
+                  key: apiBaseUrl
+                  name: {{ include "inapp.fullname" . }}
+            - name: USE_VCONSOLE
+              valueFrom:
+                configMapKeyRef: 
+                  key: useVConsole
+                  name: {{ include "inapp.fullname" . }}
+            - name: AUTH_BASE_URL
+              valueFrom:
+                secretKeyRef: 
+                  key: authBaseUrl
+                  name: {{ include "inapp.fullname" . }}
+            - name: CLIENT_ID
+              valueFrom:
+                secretKeyRef: 
+                  key: clientId
+                  name: {{ include "inapp.fullname" . }}
+            - name: CLIENT_SECRET
+              valueFrom:
+                secretKeyRef: 
+                  key: clientSecret
+                  name: {{ include "inapp.fullname" . }}
+          ports:
+            - name: http
+              containerPort: {{ .Values.service.port }}
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

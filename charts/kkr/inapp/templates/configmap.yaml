@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  labels: 
+    {{- include "inapp.labels" . | nindent 4 }}
+  name: {{ include "inapp.fullname" . }}
+data:
+  apiBaseUrl: {{ default "" .Values.config.apiBaseUrl | quote }}
+  useVConsole: {{ default "" .Values.config.useVConsole | quote }}
