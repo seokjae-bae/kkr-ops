@@ -1,0 +1,191 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "wallet-api.fullname" . }}
+  labels:
+    {{- include "wallet-api.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "wallet-api.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "wallet-api.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: db-host
+                  name: {{ include "wallet-api.fullname" . }}-db
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  key: db-user
+                  name: {{ include "wallet-api.fullname" . }}-db
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: db-password
+                  name: {{ include "wallet-api.fullname" . }}-db
+            - name: DB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  key: db-database
+                  name: {{ include "wallet-api.fullname" . }}-db
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  key: db-port
+                  name: {{ include "wallet-api.fullname" . }}-db
+            - name: DB_ENGINE
+              valueFrom:
+                secretKeyRef:
+                  key: db-engine
+                  name: {{ include "wallet-api.fullname" . }}-db
+            - name: AWS_REGION
+              valueFrom:
+                secretKeyRef:
+                  key: aws-region
+                  name: {{ include "wallet-api.fullname" . }}-aws
+            - name: AWS_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: aws-access-key
+                  name: {{ include "wallet-api.fullname" . }}-aws
+            - name: AWS_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: aws-secret-key
+                  name: {{ include "wallet-api.fullname" . }}-aws
+            - name: AWS_WALLET_CREATE_NOTIFICATION_QUEUE_NAME
+              valueFrom:
+                configMapKeyRef:
+                  key: aws-wallet-create-notification-queue-name
+                  name: {{ include "wallet-api.fullname" . }}-aws
+            - name: AWS_WALLET_CREATE_NOTIFICATION_QUEUE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: aws-wallet-create-notification-queue-url
+                  name: {{ include "wallet-api.fullname" . }}-aws
+            - name: OCTET_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: octet-api-token
+                  name: {{ include "wallet-api.fullname" . }}-octet
+            - name: OCTET_BASE_URL
+              valueFrom:
+                secretKeyRef:
+                  key: octet-base-url
+                  name: {{ include "wallet-api.fullname" . }}-octet
+            - name: WALLET_IDX
+              valueFrom:
+                secretKeyRef:
+                  key: wallet-idx
+                  name: {{ include "wallet-api.fullname" . }}-octet
+            - name: RECOVERY_PIN
+              valueFrom:
+                secretKeyRef:
+                  key: recovery-pin
+                  name: {{ include "wallet-api.fullname" . }}-octet
+            - name: ALCHEMY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: alchemy-api-key
+                  name: {{ include "wallet-api.fullname" . }}-alchemy
+            - name: ALCHEMY_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: alchemy-host
+                  name: {{ include "wallet-api.fullname" . }}-alchemy
+            - name: JWT_EXPIRES_IN
+              valueFrom:
+                configMapKeyRef:
+                  key: jwt-expires-in
+                  name: {{ include "wallet-api.fullname" . }}-jwt
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: jwt-secret
+                  name: {{ include "wallet-api.fullname" . }}-jwt
+            - name: JWT_AUTH_SECRET
+              valueFrom:
+                secretKeyRef:
+                  key: jwt-auth-secret
+                  name: {{ include "wallet-api.fullname" . }}-jwt
+            - name: HASH_IDS_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: hash-ids-key
+                  name: {{ include "wallet-api.fullname" . }}-encoding
+            - name: RSA_PRIVATE_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: rsa-private-key
+                  name: {{ include "wallet-api.fullname" . }}-encoding
+            - name: RSA_PUBLIC_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: rsa-public-key
+                  name: {{ include "wallet-api.fullname" . }}-encoding
+            - name: CHAIN_ID
+              valueFrom:
+               configMapKeyRef:
+                  key: chain-id
+                  name: {{ include "wallet-api.fullname" . }}-common
+            - name: ETHEREUM_BACKEND_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: ethereum-backend-host
+                  name: {{ include "wallet-api.fullname" . }}-common
+            - name: POLYGON_BACKEND_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: polygon-backend-host
+                  name: {{ include "wallet-api.fullname" . }}-common
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
