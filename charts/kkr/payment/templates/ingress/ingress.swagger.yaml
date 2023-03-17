@@ -1,22 +1,22 @@
 {{- if .Values.ingress.swagger.enabled -}}
-{{- $fullName := include "backend.fullname" . -}}
+{{- $fullName := include "payment.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
-{{- $ingressClass := index .Values.ingress.backend.className -}}
+{{- $ingressClass := index .Values.ingress.payment.className -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: swagger-{{ $fullName }}
   labels:
-    {{- include "backend.labels" . | nindent 4 }}
-  {{- with .Values.ingress.backend.annotations }}
+    {{- include "payment.labels" . | nindent 4 }}
+  {{- with .Values.ingress.payment.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
   ingressClassName: {{ $ingressClass }}
-  {{- if .Values.ingress.backend.tls }}
+  {{- if .Values.ingress.payment.tls }}
   tls:
-    {{- range .Values.ingress.backend.tls }}
+    {{- range .Values.ingress.payment.tls }}
     - hosts:
         {{- range .hosts }}
         - {{ . | quote }}
@@ -25,7 +25,7 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    - host: {{ .Values.ingress.backend.host }}
+    - host: {{ .Values.ingress.payment.host }}
       http:
         paths:
           - path: api/payment/docs

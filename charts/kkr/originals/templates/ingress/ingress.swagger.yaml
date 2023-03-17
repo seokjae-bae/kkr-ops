@@ -1,22 +1,22 @@
 {{- if .Values.ingress.swagger.enabled -}}
-{{- $fullName := include "backend.fullname" . -}}
+{{- $fullName := include "originals.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
-{{- $ingressClass := index .Values.ingress.backend.className -}}
+{{- $ingressClass := index .Values.ingress.originals.className -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: swagger-{{ $fullName }}
   labels:
-    {{- include "backend.labels" . | nindent 4 }}
-  {{- with .Values.ingress.backend.annotations }}
+    {{- include "originals.labels" . | nindent 4 }}
+  {{- with .Values.ingress.originals.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
   ingressClassName: {{ $ingressClass }}
-  {{- if .Values.ingress.backend.tls }}
+  {{- if .Values.ingress.originals.tls }}
   tls:
-    {{- range .Values.ingress.backend.tls }}
+    {{- range .Values.ingress.originals.tls }}
     - hosts:
         {{- range .hosts }}
         - {{ . | quote }}
@@ -25,7 +25,7 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    - host: {{ .Values.ingress.backend.host }}
+    - host: {{ .Values.ingress.originals.host }}
       http:
         paths:
           - path: api/originals/docs
