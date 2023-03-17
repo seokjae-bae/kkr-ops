@@ -34,10 +34,15 @@ spec:
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           env:
-            - name: BACKEND_HOST
+            - name: ETHEREUM_BACKEND_HOST
               valueFrom:
                 configMapKeyRef:
-                  key: backend_host
+                  key: ethereumBackendHost
+                  name: {{ include "originals.fullname" . }}
+            - name: POLYGON_BACKEND_HOST
+              valueFrom:
+                configMapKeyRef:
+                  key: polygonBackendHost
                   name: {{ include "originals.fullname" . }}
             - name: DB_HOST
               valueFrom:
@@ -72,17 +77,32 @@ spec:
             - name: DB_POOL_SIZE
               valueFrom:
                 secretKeyRef:
-                  key: pool_size
+                  key: poolSize
                   name: {{ include "originals.fullname" . }}-database
-            - name: ALCHEMY_HOST
+            - name: MIGRATE_RUN
               valueFrom:
                 secretKeyRef:
-                  key: host
+                  key: migrateRun
+                  name: {{ include "originals.fullname" . }}-database
+            - name: ETHEREURM_ALCHEMY_HOST
+              valueFrom:
+                secretKeyRef:
+                  key: ethereumHost
                   name: {{ include "originals.fullname" . }}-alchemy
-            - name: ALCHEMY_API_KEY
+            - name: POLYGON_ALCHEMY_HOST
               valueFrom:
                 secretKeyRef:
-                  key: api_key
+                  key: polygonHost
+                  name: {{ include "originals.fullname" . }}-alchemy
+            - name: ETHEREUM_ALCHEMY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: ethereumApiKey
+                  name: {{ include "originals.fullname" . }}-alchemy
+            - name: POLYGON_ALCHEMY_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  key: polygonApiKey
                   name: {{ include "originals.fullname" . }}-alchemy
           ports:
             - name: http

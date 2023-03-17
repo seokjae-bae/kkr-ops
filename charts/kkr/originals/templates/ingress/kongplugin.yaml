@@ -1,7 +1,4 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "originals.fullname" . -}}
-{{- $corsPluginName := printf "%s-%s" $fullName "cors" }}
-{{- $validateAuthServerTokenPluginName := printf "%s-%s" $fullName "validate-auth-server-token" }}
 {{- $namespace := .Release.Namespace -}}
 apiVersion: configuration.konghq.com/v1
 config:
@@ -9,7 +6,7 @@ config:
   - '*'
 kind: KongPlugin
 metadata:
-  name: {{ trunc 63 $corsPluginName }}
+  name: {{ include "originals.cors" . }}
 plugin: cors
 ---
 apiVersion: configuration.konghq.com/v1
@@ -21,9 +18,8 @@ config:
   client_id: {{ default "" .Values.config.oauth.client_id | quote }}
   client_secret: {{ default "" .Values.config.oauth.client_secret | quote }}
   token_introspect_url: {{ default "" .Values.config.oauth.token_introspect_url | quote }}
-
 kind: KongPlugin
 metadata:
-  name: {{ trunc 63 $validateAuthServerTokenPluginName }}
+  name: {{ include "originals.validateAuthServerToken" . }}
 plugin: oauth2-token-introspection-request
 {{- end }}

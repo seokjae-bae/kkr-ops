@@ -16,7 +16,8 @@ fullnameOverride: ""
 
 config:
   backend:
-    backend_host: ""
+    ethereumBackendHost: ""
+    polygonBackendHost: ""
   oauth:
     client_id: "client_id"
     client_secret: "client_secret"
@@ -30,10 +31,13 @@ secret:
     password: ""
     port: ""
     user: ""
-    pool_size: ""
+    poolSize: ""
+    migrateRun: false
   alchemy:
-    host: ""
-    api_key: ""
+    ethereumHost: "https://eth-mainnet.g.alchemy.com"
+    polygonHost: "https://polygon-mainnet.g.alchemy.com"
+    ethereumApiKey: ""
+    polygonApiKey: ""
 
 serviceAccount:
   # Specifies whether a service account should be created

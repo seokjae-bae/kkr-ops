@@ -1,12 +1,10 @@
 {{- if .Values.ingress.enabled -}}
-{{- $fullName := include "auth.fullname" . -}}
-{{- $corsPluginName := printf "%s-%s" $fullName "cors" }}
 apiVersion: configuration.konghq.com/v1
 config:
   origins:
   - '*'
 kind: KongPlugin
 metadata:
-  name: {{ trunc 63 $corsPluginName }}
+  name: {{ include "auth.cors" . }}
 plugin: cors
 {{- end }}

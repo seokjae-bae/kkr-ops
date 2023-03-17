@@ -21,10 +21,10 @@ data:
   collectionQueueUrl: {{ default "" .Values.config.aws.queue.collectionQueueUrl | quote }}
   refreshItemMetaQueueName: {{ default "" .Values.config.aws.queue.refreshItemMetaQueueName | quote }}
   refreshItemMetaQueueUrl: {{ default "" .Values.config.aws.queue.refreshItemMetaQueueUrl | quote }}
-  orderFillChangedQueueName: {{ default "" .Values.config.aws.queue.orderFillChangedQueueName | quote }}
-  orderFillChangedQueueUrl: {{ default "" .Values.config.aws.queue.orderFillChangedQueueUrl | quote }}
-  ordersMatchedQueueName: {{ default "" .Values.config.aws.queue.ordersMatchedQueueName | quote }}
-  ordersMatchedQueueUrl: {{ default "" .Values.config.aws.queue.ordersMatchedQueueUrl | quote }}
+  orderCancelledQueueName: {{ default "" .Values.config.aws.queue.orderCancelledQueueName | quote }}
+  orderCancelledQueueUrl: {{ default "" .Values.config.aws.queue.orderCancelledQueueUrl | quote }}
+  orderFulfilledQueueName: {{ default "" .Values.config.aws.queue.orderFulfilledQueueName | quote }}
+  orderFulfilledQueueUrl: {{ default "" .Values.config.aws.queue.orderFulfilledQueueUrl | quote }}
   rapidCrawlingCollectionQueueName: {{ default "" .Values.config.aws.queue.rapidCrawlingCollectionQueueName | quote }}
   rapidCrawlingCollectionQueueUrl: {{ default "" .Values.config.aws.queue.rapidCrawlingCollectionQueueUrl | quote }}
   rapidCrawlingItemQueueName: {{ default "" .Values.config.aws.queue.rapidCrawlingItemQueueName | quote }}

@@ -3,4 +3,5 @@ kind: ConfigMap
 metadata:
   name: {{ include "originals.fullname" . }}
 data:
-  backend_host: {{ default "" .Values.config.backend.backend_host | quote }}
+  ethereumBackendHost: {{ default "" .Values.config.backend.ethereumBackendHost | quote }}
+  polygonBackendHost: {{ default "" .Values.config.backend.polygonBackendHost | quote }}

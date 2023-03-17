@@ -64,3 +64,27 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create kongplugin name of cors
+*/}}
+{{- define "backend.cors" -}}
+{{ $fullName := include "backend.fullname" . }}
+{{- printf "%s-%s" $fullName "cors" | trunc 63 }}
+{{- end }}
+
+{{/*
+Create kongplugin name of validate auth server token
+*/}}
+{{- define "backend.validateAuthServerToken" -}}
+{{ $fullName := include "backend.fullname" . }}
+{{- printf "%s-%s" $fullName "validate-auth-server-token" | trunc 63 }}
+{{- end }}
+
+{{/*
+Create kongplugin name of upstream timeout setting
+*/}}
+{{- define "backend.upstreamTimeout" -}}
+{{ $fullName := include "backend.fullname" . }}
+{{- printf "%s-%s" $fullName "upstream-timeout" | trunc 63 }}
+{{- end }}

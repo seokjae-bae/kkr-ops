@@ -157,25 +157,25 @@ spec:
                 configMapKeyRef:
                   key: refreshItemMetaQueueUrl
                   name: {{ include "backend.fullname" . }}-aws-queue
-            - name: ORDER_FILL_CHANGED_QUEUE_NAME
+            - name: ORDER_CANCELLED_QUEUE_NAME
               valueFrom:
                 configMapKeyRef:
-                  key: orderFillChangedQueueName
+                  key: orderCancelledQueueName
                   name: {{ include "backend.fullname" . }}-aws-queue
-            - name: ORDER_FILL_CHANGED_QUEUE_URL
+            - name: ORDER_CANCELLED_QUEUE_URL
               valueFrom:
                 configMapKeyRef:
-                  key: orderFillChangedQueueUrl
+                  key: orderCancelledQueueUrl
                   name: {{ include "backend.fullname" . }}-aws-queue
-            - name: ORDERS_MATCHED_QUEUE_NAME
+            - name: ORDER_FULFILLED_QUEUE_NAME
               valueFrom:
                 configMapKeyRef:
-                  key: ordersMatchedQueueName
+                  key: orderFulfilledQueueName
                   name: {{ include "backend.fullname" . }}-aws-queue
-            - name: ORDERS_MATCHED_QUEUE_URL
+            - name: ORDER_FULFILLED_QUEUE_URL
               valueFrom:
                 configMapKeyRef:
-                  key: ordersMatchedQueueUrl
+                  key: orderFulfilledQueueUrl
                   name: {{ include "backend.fullname" . }}-aws-queue
             - name: RAPID_CRAWLING_COLLECTION_QUEUE_NAME
               valueFrom:

@@ -1,16 +1,11 @@
 {{- if .Values.ingress.backend.enabled -}}
-{{- $fullName := include "backend.fullname" . -}}
-{{- $corsPluginName := printf "%s-%s" $fullName "cors" }}
-{{- $validateAuthServerTokenPluginName := printf "%s-%s" $fullName "validate-auth-server-token" }}
-{{- $upstreamTimeoutPluginName := printf "%s-%s" $fullName "upstream-timeout" }}
-{{- $namespace := .Release.Namespace -}}
 apiVersion: configuration.konghq.com/v1
 config:
   origins:
   - '*'
 kind: KongPlugin
 metadata:
-  name: {{ trunc 63 $corsPluginName }}
+  name: {{ include "backend.cors" . }}
 plugin: cors
 ---
 apiVersion: configuration.konghq.com/v1
@@ -22,19 +17,16 @@ config:
   client_id: {{ default "" .Values.config.oauth.client_id | quote }}
   client_secret: {{ default "" .Values.config.oauth.client_secret | quote }}
   token_introspect_url: {{ default "" .Values.config.oauth.token_introspect_url | quote }}
-
 kind: KongPlugin
 metadata:
-  name: {{ trunc 63 $validateAuthServerTokenPluginName }}
+  name: {{ include "backend.validateAuthServerToken" . }}
 plugin: oauth2-token-introspection-request
 ---
 apiVersion: configuration.konghq.com/v1
 kind: KongPlugin
 metadata:
-  name: {{ trunc 63 $upstreamTimeoutPluginName }}
+  name: {{ include "backend.upstreamTimeout" . }}
 config: 
-  connect_timeout: 300000
-  send_timeout: 300000
   read_timeout: 300000
 plugin: upstream-timeout
 {{- end }}

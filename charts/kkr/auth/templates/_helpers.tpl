@@ -60,3 +60,11 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Create kongplugin name of cors
+*/}}
+{{- define "auth.cors" -}}
+{{ $fullName := include "auth.fullname" . }}
+{{- printf "%s-%s" $fullName "cors" | trunc 63 }}
+{{- end }}

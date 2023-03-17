@@ -20,7 +20,7 @@ metadata:
   labels:
     {{- include "backend.labels" . | nindent 4 }}
   annotations:
-    konghq.com/plugins: {{ $fullName }}-cors,{{ $fullName }}-validate-auth-server-token,{{ $fullName }}-upstream-timeout
+    konghq.com/plugins: {{ $fullName }}-cors,{{ $fullName }}-validate-auth-server-token
   {{- with .Values.ingress.backend.annotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}

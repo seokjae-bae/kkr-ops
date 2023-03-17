@@ -38,6 +38,11 @@ spec:
                 configMapKeyRef:
                   key: order-contract-address
                   name: {{ include "event-listener.fullname" . }}
+            - name: WHITELIST_CONTRACT_ADDRESS
+              valueFrom:
+                configMapKeyRef:
+                  key: whitelist-contract-addresses
+                  name: {{ include "event-listener.fullname" . }}
             - name: EXCHANGE_CONTRACT_ADDRESS
               valueFrom:
                 configMapKeyRef:
@@ -108,15 +113,15 @@ spec:
                 configMapKeyRef:
                   key: nft-transfer-event-queue-url
                   name: {{ include "event-listener.fullname" . }}
-            - name: ORDER_FILL_CHANGED_EVENT_QUEUE_URL
+            - name: ORDER_CANCELLED_EVENT_QUEUE_URL
               valueFrom:
                 configMapKeyRef:
-                  key: order-fill-changed-event-queue-url
+                  key: order-cancelled-event-queue-url
                   name: {{ include "event-listener.fullname" . }}
-            - name: ORDERS_MATCHED_EVENT_QUEUE_URL
+            - name: ORDER_FULFILLED_EVENT_QUEUE_URL
               valueFrom:
                 configMapKeyRef:
-                  key: orders-matched-event-queue-url
+                  key: order-fulfilled-event-queue-url
                   name: {{ include "event-listener.fullname" . }}
             - name: OWNERSHIP_TRANSFERRED_EVENT_QUEUE_URL
               valueFrom:
@@ -127,6 +132,16 @@ spec:
               valueFrom:
                 configMapKeyRef:
                   key: exchange-event-queue-url
+                  name: {{ include "event-listener.fullname" . }}
+            - name: ORDER_CANCELLED_EVENT_RETRY_COUNT
+              valueFrom:
+                configMapKeyRef:
+                  key: order-cancelled-event-retry-count
+                  name: {{ include "event-listener.fullname" . }}
+            - name: ORDER_FULFILLED_EVENT_RETRY_COUNT
+              valueFrom:
+                configMapKeyRef:
+                  key: order-fulfilled-event-retry-count
                   name: {{ include "event-listener.fullname" . }}
             - name: DB_ENGINE
               valueFrom:
