@@ -16,12 +16,12 @@ fullnameOverride: ""
 
 config:
   common:
-    chain_id: "5"
-    oauth_endpoint: "https://auth.goerli-alpha.croffle.me"
-    oauth_client_id: test
-    oauth_client_secret: secret
-    swagger_uri: "https://api.goerli-alpha.croffle.me"
-    next_public_base_url: "/api/host/docs-json"
+    chain_id: "////"
+    oauth_endpoint: ""
+    oauth_client_id: ""
+    oauth_client_secret: ""
+    swagger_uri: ""
+    next_public_base_url: ""
 
 serviceAccount:
   # Specifies whether a service account should be created
@@ -51,7 +51,7 @@ service:
 
 ingress:
   backend:
-    enabled: true
+    enabled: false
     className: kong
     annotations:
       cert-manager.io/cluster-issuer: letsencrypt-prod
