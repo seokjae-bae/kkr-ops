@@ -50,18 +50,17 @@ service:
   port: 80
 
 ingress:
-  backend:
-    enabled: false
-    className: kong
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-prod
-      kubernetes.io/tls-acme: "true"
-    hosts:
-      - host: swagger-ui.goerli-alpha.croffle.me
-    tls:
-      - hosts:
-          - swagger-ui.goerli-alpha.croffle.me
-        secretName: swagger-ui-tls
+  enabled: false
+  className: kong
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
+  hosts:
+    - host: swagger-ui.goerli-alpha.croffle.me
+  tls:
+    - hosts:
+        - swagger-ui.goerli-alpha.croffle.me
+      secretName: swagger-ui-tls
 
   swagger:
     enabled: true
