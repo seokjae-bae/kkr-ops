@@ -1,22 +1,22 @@
-{{- if .Values.ingress.swagger.enabled -}}
+{{- if .Values.ingress.enabled -}}
 {{- $fullName := include "wallet-api.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
-{{- $ingressClass := index .Values.ingress.wallet-api.className -}}
+{{- $ingressClass := index .Values.ingress.className -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: swagger-{{ $fullName }}
   labels:
     {{- include "wallet-api.labels" . | nindent 4 }}
-  {{- with .Values.ingress.wallet-api.annotations }}
+  {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
   ingressClassName: {{ $ingressClass }}
-  {{- if .Values.ingress.wallet-api.tls }}
+  {{- if .Values.ingress.tls }}
   tls:
-    {{- range .Values.ingress.wallet-api.tls }}
+    {{- range .Values.ingress.tls }}
     - hosts:
         {{- range .hosts }}
         - {{ . | quote }}
@@ -25,7 +25,7 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    - host: {{ .Values.ingress.wallet-api.host }}
+    - host: {{ .Values.ingress.host }}
       http:
         paths:
           - path: api/wallet-api/docs

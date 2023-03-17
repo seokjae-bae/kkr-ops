@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "swagger-ui.fullname" . }}-common
+data:
+  chain_id: {{ default "" .Values.config.common.chain_id | quote }}
+  oauth_client_id: {{ default "" .Values.config.common.oauth_client_id | quote }}
+  oauth_endpoint: {{ default "" .Values.config.common.oauth_endpoint | quote }}
+  oauth_client_secret: {{ default "" .Values.config.common.oauth_client_secret | quote }}
+  swagger_uri: {{ default "" .Values.config.common.swagger_uri | quote }}
+  next_public_base_url: {{ default "" .Values.config.common.next_public_base_url | quote }}

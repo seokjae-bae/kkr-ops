@@ -1,10 +1,10 @@
-{{- if .Values.ingress.backend.enabled -}}
+{{- if .Values.ingress.enabled -}}
 {{- $fullName := include "payment.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
-{{- $ingressClass := index .Values.ingress.backend.className -}}
-{{- if and .Values.ingress.backend.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
-  {{- if not (hasKey .Values.ingress.backend.annotations "kubernetes.io/ingress.class") }}
-  {{- $_ := set .Values.ingress.backend.annotations "kubernetes.io/ingress.class" .Values.ingress.backend.className}}
+{{- $ingressClass := index .Values.ingress.className -}}
+{{- if and .Values.ingress.className (not (semverCompare ">=1.18-0" .Capabilities.KubeVersion.GitVersion)) }}
+  {{- if not (hasKey .Values.ingress.annotations "kubernetes.io/ingress.class") }}
+  {{- $_ := set .Values.ingress.annotations "kubernetes.io/ingress.class" .Values.ingress.className}}
   {{- end }}
 {{- end }}
 {{- if semverCompare ">=1.19-0" .Capabilities.KubeVersion.GitVersion -}}
@@ -21,14 +21,14 @@ metadata:
     {{- include "payment.labels" . | nindent 4 }}
   annotations:
     konghq.com/plugins: {{ $fullName }}-cors,{{ $fullName }}-validate-auth-server-token
-  {{- with .Values.ingress.backend.annotations }}
+  {{- with .Values.ingress.annotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
 spec:
   ingressClassName: {{ $ingressClass }}
-  {{- if .Values.ingress.backend.tls }}
+  {{- if .Values.ingress.tls }}
   tls:
-    {{- range .Values.ingress.backend.tls }}
+    {{- range .Values.ingress.tls }}
     - hosts:
         {{- range .hosts }}
         - {{ . | quote }}
@@ -37,7 +37,7 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.ingress.backend.hosts }}
+    {{- range .Values.ingress.hosts }}
     - host: {{ .host | quote }}
     {{- end }}
       http:
