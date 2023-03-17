@@ -16,7 +16,7 @@ fullnameOverride: ""
 
 config:
   common:
-    chain_id: "////"
+    chain_id: ""
     oauth_endpoint: ""
     oauth_client_id: ""
     oauth_client_secret: ""
