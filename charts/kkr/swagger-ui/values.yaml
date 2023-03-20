@@ -50,7 +50,7 @@ service:
   port: 80
 
 ingress:
-  enabled: false
+  enabled: true
   className: kong
   annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
