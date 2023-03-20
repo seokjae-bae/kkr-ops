@@ -61,9 +61,6 @@ ingress:
     - hosts:
         - swagger-ui.goerli-alpha.croffle.me
       secretName: swagger-ui-tls
-
-  swagger:
-    enabled: true
   #  - secretName: chart-example-tls
   #    hosts:
   #      - chart-example.local

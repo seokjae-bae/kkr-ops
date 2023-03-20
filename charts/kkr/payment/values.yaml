@@ -91,6 +91,9 @@ ingress:
         - test-seokjae.croffle.me
       secretName: test-seokjae.croffle.me
 
+  swagger:
+    enabled: false
+
 resources:
   {}
   # We usually recommend not to specify default resources and to leave this as a conscious

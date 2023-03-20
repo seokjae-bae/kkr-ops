@@ -1,4 +1,4 @@
-{{- if .Values.ingress.enabled -}}
+{{- if .Values.ingress.swagger.enabled -}}
 {{- $fullName := include "payment.fullname" . -}}
 {{- $svcPort := .Values.service.port -}}
 {{- $ingressClass := index .Values.ingress.className -}}
