@@ -28,7 +28,7 @@ spec:
     - host: {{ .Values.ingress.backend.host }}
       http:
         paths:
-          - path: api/backend/docs
+          - path: "/api/backend/docs"
             pathType: ImplementationSpecific
             backend:
               service:
