@@ -1,4 +1,4 @@
-{{- if .Values.ingress.backend.enabled -}}
+{{- if .Values.ingress.enabled -}}
 {{- $namespace := .Release.Namespace -}}
 apiVersion: configuration.konghq.com/v1
 config:

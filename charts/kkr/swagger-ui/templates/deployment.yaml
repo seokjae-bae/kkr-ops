@@ -1,0 +1,87 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "swagger-ui.fullname" . }}
+  labels:
+    {{- include "swagger-ui.labels" . | nindent 4 }}
+spec:
+  {{- if not .Values.autoscaling.enabled }}
+  replicas: {{ .Values.replicaCount }}
+  {{- end }}
+  selector:
+    matchLabels:
+      {{- include "swagger-ui.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      {{- with .Values.podAnnotations }}
+      annotations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      labels:
+        {{- include "swagger-ui.selectorLabels" . | nindent 8 }}
+    spec:
+      {{- with .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      serviceAccountName: {{ include "swagger-ui.serviceAccountName" . }}
+      securityContext:
+        {{- toYaml .Values.podSecurityContext | nindent 8 }}
+      containers:
+        - name: {{ .Chart.Name }}
+          securityContext:
+            {{- toYaml .Values.securityContext | nindent 12 }}
+          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: OAUTH_ENDPOINT
+              valueFrom:
+                configMapKeyRef:
+                  key: oauth_endpoint
+                  name: {{ include "swagger-ui.fullname" . }}-common
+            - name: OAUTH_CLIENT_ID
+              valueFrom:
+                configMapKeyRef:
+                  key: oauth_client_id
+                  name: {{ include "swagger-ui.fullname" . }}-common
+            - name: OAUTH_CLIENT_SECRET
+              valueFrom:
+                configMapKeyRef:
+                  key: oauth_client_secret
+                  name: {{ include "swagger-ui.fullname" . }}-common
+            - name: SWAGGER_URI
+              valueFrom:
+                configMapKeyRef:
+                  key: swagger_uri
+                  name: {{ include "swagger-ui.fullname" . }}-common
+            - name: NEXT_PUBLIC_BASE_URL
+              valueFrom:
+                configMapKeyRef:
+                  key: next_public_base_url
+                  name: {{ include "swagger-ui.fullname" . }}-common
+          ports:
+            - name: http
+              containerPort: 3000
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}
+      {{- with .Values.nodeSelector }}
+      nodeSelector:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.affinity }}
+      affinity:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}
+      {{- with .Values.tolerations }}
+      tolerations:
+        {{- toYaml . | nindent 8 }}
+      {{- end }}

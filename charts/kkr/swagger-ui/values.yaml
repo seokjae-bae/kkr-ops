@@ -1,14 +1,14 @@
-# Default values for wallet-api.
+# Default values for swagger-ui.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
 replicaCount: 1
 
 image:
-  repository: 293315485843.dkr.ecr.ap-northeast-2.amazonaws.com/kkr/wallet-api
+  repository: 293315485843.dkr.ecr.ap-northeast-2.amazonaws.com/kkr/swagger-ui
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 0.0.3-96bbd7f-0
+  tag: ""
 
 imagePullSecrets: []
 nameOverride: ""
@@ -16,47 +16,21 @@ fullnameOverride: ""
 
 config:
   common:
-    chainId: ""
-    ethereumBackendHost: ""
-    polygonBackendHost: ""
-  aws:
-    walletCreateNotificationQueueName: ""
-    walletCreateNotificationQueueUrl: ""
-  jwt:
-    expiresIn: "180"
-  oauth:
-    cliendId: "client_id"
-    clientSecret: "client_secret"
-    tokenIntrospectUrl: ""
-secret:
-  db:
-    host: ""
-    user: ""
-    password: ""
-    database: ""
-    port: ""
-    engine: ""
-  aws:
-    region: ""
-    accessKey: ""
-    secretKey: ""
-  octet:
-    apiToken: ""
-    baseUrl: ""
-    walletId: ""
-    recoveryPin: ""
-  jwt:
-    secret: ""
-    authSecret: ""
-  encoding:
-    hashIdsKey: ""
-    rsaPrivateKey: ""
-    rsaPublicKey: ""
-  alchemy:
-    apiKey: ""
-    host: ""
+    chain_id: ""
+    oauth_endpoint: ""
+    oauth_client_id: ""
+    oauth_client_secret: ""
+    swagger_uri: ""
+    next_public_base_url: ""
 
-
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
 
 podAnnotations: {}
 
@@ -76,24 +50,20 @@ service:
   port: 80
 
 ingress:
-  enabled: true
+  enabled: false
   className: kong
-  annotations: 
+  annotations:
     cert-manager.io/cluster-issuer: letsencrypt-prod
     kubernetes.io/tls-acme: "true"
-    # kubernetes.io/ingress.class: nginx
   hosts:
-    - host: api.mumbai.croffle.me
-      #   paths:
-      #     - path: /
-      #       pathType: ImplementationSpecific
-  tls: 
-    - secretName: "wallet-api-tls"
-      hosts:
-        - api.mumbai.croffle.me
-  
-  swagger:
-    enabled: false
+    - host: swagger-ui.goerli-alpha.croffle.me
+  tls:
+    - hosts:
+        - swagger-ui.goerli-alpha.croffle.me
+      secretName: swagger-ui-tls
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
 
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious

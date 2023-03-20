@@ -77,20 +77,22 @@ service:
   port: 80
 
 ingress:
-  backend:
-    enabled: true
-    className: kong
-    annotations:
-      cert-manager.io/cluster-issuer: letsencrypt-prod
-      kubernetes.io/tls-acme: "true"
-    host: test-seokjae.croffle.me
-    hosts:
-      - host: test.com
-      - host: example.com
-    tls:
-      - hosts:
-          - test-seokjae.croffle.me
-        secretName: test-seokjae.croffle.me
+  enabled: true
+  className: kong
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
+  host: test-seokjae.croffle.me
+  hosts:
+    - host: test.com
+    - host: example.com
+  tls:
+    - hosts:
+        - test-seokjae.croffle.me
+      secretName: test-seokjae.croffle.me
+
+  swagger:
+    enabled: false
 
 resources:
   {}
