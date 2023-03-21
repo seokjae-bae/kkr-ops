@@ -19,6 +19,7 @@ config:
     backend_host: ""
     frontend_host: ""
     originals_host: ""
+    in_app_host: ""
     ethereum_network: ""
   oauth:
     client_id: "test"
