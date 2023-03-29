@@ -15,11 +15,11 @@ apiVersion: extensions/v1beta1
 {{- end }}
 kind: Ingress
 metadata:
-  name: private-{{ $fullName }}
+  name: wallet-private-{{ $fullName }}
   labels:
     {{- include "wallet-api.labels" . | nindent 4 }}
   annotations:
-    konghq.com/plugins: {{ include "wallet-api.cors" . }},{{ include "wallet-api.validateAuthServerToken" . }}
+    konghq.com/plugins: {{ $fullName }}-cors
   {{- with .Values.ingress.annotations }}
     {{- toYaml . | nindent 4 }}
   {{- end }}
@@ -47,14 +47,14 @@ spec:
                 name: {{ $fullName }}
                 port:
                   number: {{ $svcPort }}
-            path: /api/v1/private/wallets
+            path: /api/v1/private/wallets/update-pin
             pathType: ImplementationSpecific
           - backend:
               service:
                 name: {{ $fullName }}
                 port:
                   number: {{ $svcPort }}
-            path: /api/v1/private/auth
+            path: /api/v1/private/transaction
             pathType: ImplementationSpecific
     {{- end }}
 {{- end }}
