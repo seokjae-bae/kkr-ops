@@ -46,6 +46,12 @@ secret:
     baseUrl: ""
     walletId: ""
     recoveryPin: ""
+  delegate:
+    apiToken: ""
+    walletId: ""
+    childAdminAddress: ""
+    maximumGasPrice: ""
+    maximumCountPerDay: ""
   jwt:
     secret: ""
     authSecret: ""

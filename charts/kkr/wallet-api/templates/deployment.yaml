@@ -103,6 +103,31 @@ spec:
                 secretKeyRef:
                   key: wallet-idx
                   name: {{ include "wallet-api.fullname" . }}-octet
+            - name: OCTET_DELEGATE_API_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  key: delegate-api-token
+                  name: {{ include "wallet-api.fullname" . }}-delegate
+            - name: OCTET_DELEGATE_WALLET_IDX
+              valueFrom:
+                secretKeyRef:
+                  key: delegate-wallet-id
+                  name: {{ include "wallet-api.fullname" . }}-delegate
+            - name: OCTET_DELEGATE_CHILD_ADMIN_ADDRESS
+              valueFrom:
+                secretKeyRef:
+                  key: delegate-child-admin-address
+                  name: {{ include "wallet-api.fullname" . }}-delegate
+            - name: MAXIMUM_DELEGATE_GAS_PRICE
+              valueFrom:
+                secretKeyRef:
+                  key: delegate-maximum-gas-price
+                  name: {{ include "wallet-api.fullname" . }}-delegate
+            - name: MAXIMUM_DELEGATE_COUNT_PER_DAY
+              valueFrom:
+                secretKeyRef:
+                  key: delegate-maximum-count-per-day
+                  name: {{ include "wallet-api.fullname" . }}-delegate
             - name: RECOVERY_PIN
               valueFrom:
                 secretKeyRef:
